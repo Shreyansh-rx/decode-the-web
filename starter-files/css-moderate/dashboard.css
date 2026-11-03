@@ -1,0 +1,47 @@
+/* Broken Dashboard Layout */
+
+.dashboard {
+  /* BUG: Not using grid */
+  display: block;
+}
+
+.sidebar {
+  /* BUG: Should be fixed width in grid */
+  width: 100%;
+  float: left; /* BUG: Don't use float */
+}
+
+.main-content {
+  /* BUG: Not filling remaining space */
+  width: 100%;
+  clear: both;
+}
+
+.card-grid {
+  /* BUG: Cards stacking instead of responsive grid */
+  display: block;
+}
+
+.card {
+  /* BUG: Fixed pixel widths break responsiveness */
+  width: 400px;
+  margin-bottom: 20px;
+  /* BUG: Content overflows on small screens */
+  overflow: visible;
+}
+
+/* BUG: Breakpoint in reverse order */
+@media (max-width: 480px) {
+  .dashboard {
+    /* Mobile styles applied here */
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    /* Tablet overrides mobile because it comes after! */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+}

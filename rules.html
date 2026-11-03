@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Competition rules, scoring structure, and submission guidelines for DECODE THE WEB.">
+  <title>Rules & Scoring — DECODE THE WEB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="challenges.html" class="nav__link">Challenges</a>
+        <a href="rules.html" class="nav__link active">Rules</a>
+        <a href="about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">Rules & <span>Scoring</span></h1>
+      <p class="page-header__desc">Everything you need to know before the competition starts. Read carefully.</p>
+    </div>
+  </header>
+
+  <!-- Rules Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Guidelines</div>
+        <h2 class="section__title">Competition Rules</h2>
+        <p class="section__desc">Follow these rules to ensure fair play and a smooth competition experience.</p>
+      </div>
+
+      <div class="rules-grid animate-on-scroll">
+        <div class="rule-card">
+          <div class="rule-card__icon">🎯</div>
+          <h3 class="rule-card__title">Format</h3>
+          <p class="rule-card__text">The competition consists of <strong>9 challenges</strong> distributed across HTML, CSS, and JavaScript. You are free to tackle challenges in any sequence you prefer.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">👤</div>
+          <h3 class="rule-card__title">Individual Work</h3>
+          <p class="rule-card__text">Participants must work <strong>individually</strong>. Collaboration with other participants during the competition is not permitted.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">🛠️</div>
+          <h3 class="rule-card__title">Allowed Tools</h3>
+          <p class="rule-card__text">You may use <strong>VS Code</strong> (or any text editor) and <strong>browser Developer Tools</strong> (Inspect Element, Console, Network, and Computed Styles).</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">✨</div>
+          <h3 class="rule-card__title">Clean Code & Structure</h3>
+          <p class="rule-card__text">Write clean, well-formatted code. Proper indentation, semantic tags, and descriptive variable names will be considered during manual review.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">🌐</div>
+          <h3 class="rule-card__title">Browser Testing</h3>
+          <p class="rule-card__text">Always test your solutions directly in a modern browser. Check for console errors, responsive layouts, and visual parity with the expected design preview.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">📋</div>
+          <h3 class="rule-card__title">No Copying</h3>
+          <p class="rule-card__text">Copying another participant's work is <strong>strictly prohibited</strong>. Each submission must be your own authentic work. Plagiarism will result in disqualification.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">📤</div>
+          <h3 class="rule-card__title">Submission Procedure</h3>
+          <p class="rule-card__text">Package your corrected source files as instructed and submit your final work to the organizers before the announced submission cutoff.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">📝</div>
+          <h3 class="rule-card__title">Manual Evaluation</h3>
+          <p class="rule-card__text">All submissions will be <strong>manually evaluated</strong> by the organizers. There is no automated testing or grading system.</p>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card__icon">⚖️</div>
+          <h3 class="rule-card__title">Final Decision</h3>
+          <p class="rule-card__text">The organizers' decisions regarding scoring and results are <strong>final</strong>. No appeals or disputes will be entertained.</p>
+        </div>
+      </div>
+
+      <!-- Hard Challenge Tip -->
+      <div class="animate-on-scroll" style="margin-top: 40px;">
+        <div class="info-box">
+          <div class="info-box__title">💡 Pro Tip for Hard Challenges</div>
+          <p class="info-box__text">
+            Hard challenges (worth 20 points each) are designed to test deep debugging skills.
+            Make full use of browser DevTools: inspect DOM nodes, check CSS specificity in the Computed styles panel, and use breakpoints to trace runtime logic.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scoring Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Points</div>
+        <h2 class="section__title">Scoring Structure</h2>
+        <p class="section__desc">Points are awarded based on challenge difficulty. Maximum possible score: 105 points.</p>
+      </div>
+
+      <div class="scoring-table-wrapper animate-on-scroll">
+        <table class="scoring-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Easy (5 pts)</th>
+              <th>Moderate (10 pts)</th>
+              <th>Hard (20 pts)</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span></td>
+              <td class="points">5</td>
+              <td class="points">10</td>
+              <td class="points">20</td>
+              <td class="points" style="color: var(--text-heading);">35</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--css">{ } CSS</span></td>
+              <td class="points">5</td>
+              <td class="points">10</td>
+              <td class="points">20</td>
+              <td class="points" style="color: var(--text-heading);">35</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--js">JS JavaScript</span></td>
+              <td class="points">5</td>
+              <td class="points">10</td>
+              <td class="points">20</td>
+              <td class="points" style="color: var(--text-heading);">35</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4">Maximum Total Score</td>
+              <td class="points" style="color: var(--accent-purple); font-size: 1.2rem;">105</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box animate-on-scroll" style="margin-top: 32px;">
+        <div class="info-box__title">ℹ️ Evaluation Note</div>
+        <p class="info-box__text">
+          All scores are evaluated <strong>manually</strong> by the competition organizers. Partial credit may be awarded for partially correct solutions.
+          The scoring is based on correctness, code quality, and adherence to the challenge requirements.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Home</a>
+          <a href="challenges.html" class="footer__link">Challenges</a>
+          <a href="about.html" class="footer__link">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

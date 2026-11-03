@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JavaScript Easy Challenge: Fix broken interactive counter event listeners and state updates. DECODE THE WEB.">
+  <title>Interactive Counter — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Challenge Detail -->
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--js">JS JavaScript</span>
+          <span class="badge badge--easy">Easy</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">5 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">Interactive Counter</h1>
+        <p class="challenge-detail__subtitle">A webpage contains an interactive counter widget, but its buttons are broken due to event listener and state update bugs. Debug the JavaScript logic.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <!-- Main Content -->
+        <div class="challenge-detail__main">
+          <!-- Problem Statement -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>You have been given a clean counter widget intended for an interactive web dashboard. However, the developer wrote several JavaScript bugs:</p>
+            <p>Clicking the <strong>Increment</strong> button concatenates strings instead of adding numbers (e.g. producing <code>0111</code> instead of <code>3</code>), clicking the <strong>Decrement</strong> button throws an unhandled reference error in the console, and the <strong>Reset</strong> button fails to update the display.</p>
+            <p>Your task is to inspect the JavaScript file, identify all syntax, scoping, and logic bugs, and restore full functionality to the counter.</p>
+          </div>
+
+          <!-- Requirements -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Fix the DOM element selection so that buttons and counter display are properly targeted.</li>
+              <li>Ensure the counter value is stored and manipulated as a numerical <code>Number</code> type, preventing string concatenation.</li>
+              <li>Implement proper event listeners using <code>addEventListener</code> rather than faulty inline attributes or missing references.</li>
+              <li>Repair the <strong>Increment</strong> function to increase the counter by 1 on each click.</li>
+              <li>Repair the <strong>Decrement</strong> function to decrease the counter by 1 on each click (prevent negative values if at 0).</li>
+              <li>Implement the <strong>Reset</strong> function to return the counter value to 0.</li>
+              <li>Correctly update the DOM textContent on every action without page refresh.</li>
+            </ul>
+          </div>
+
+          <!-- Expected Behaviour -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Expected Behaviour
+            </h2>
+            <ul>
+              <li>Initial counter displays <code class="inline-code">0</code>.</li>
+              <li>Clicking <strong>+</strong> increases the value: 0 → 1 → 2 → 3.</li>
+              <li>Clicking <strong>−</strong> decreases the value: 3 → 2 → 1 → 0. (Stops at 0, no negative count).</li>
+              <li>Clicking <strong>Reset</strong> instantly sets the count back to 0.</li>
+              <li>No errors logged in the browser console.</li>
+              <li>Clean, readable vanilla JavaScript without external dependencies.</li>
+            </ul>
+          </div>
+
+          <!-- Starter Code Preview -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Code Preview
+            </h2>
+            <p>Below is the faulty code from <code class="inline-code">counter.js</code>:</p>
+
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>counter.js (faulty starter)</span>
+                <div>
+                  <button onclick="downloadCode('counter.js', getCounterStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download File</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>// Faulty Counter Implementation
+// BUG 1: Initialized as string instead of integer
+let count = "0";
+
+// BUG 2: Incorrect selector query (missing dot or ID hash)
+const counterDisplay = document.querySelector('counter-value');
+const btnIncrement = document.getElementById('btn-add');
+const btnDecrement = document.getElementById('btn-sub');
+const btnReset = document.getElementById('btn-clear');
+
+// BUG 3: String concatenation bug: "0" + 1 produces "01"
+function increment() {
+  count = count + 1;
+  updateDisplay();
+}
+
+// BUG 4: Typo in variable name causing ReferenceError
+function decrement() {
+  if (counts &gt; 0) {
+    count = count - 1;
+  }
+  updateDisplay();
+}
+
+// BUG 5: Reset does not change the actual count variable
+function reset() {
+  counterDisplay.innerHTML = "0";
+  // Forgot to update internal state 'count'!
+}
+
+function updateDisplay() {
+  // BUG 6: Property misspelled
+  counterDisplay.textContents = count;
+}
+
+// BUG 7: Missing event listener bindings or wrong event types
+btnIncrement.onclick = increment(); // Runs immediately instead of on click!
+// btnDecrement and btnReset listeners never attached!</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download or copy the starter code files into your local project workspace.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Fix the event listeners, number conversions, and DOM manipulation functions in <code class="inline-code">counter.js</code>.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Open the HTML file in Chrome/Firefox and test that all buttons update the counter accurately without console errors.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Submit your corrected <code class="inline-code">counter.js</code> file to the competition organizers before time expires.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">JavaScript</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--easy">Easy</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">5</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive / Reference Preview -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Target UI Preview</h3>
+            <div class="preview-box">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+              </div>
+              <div class="preview-box__body" style="background: #0f172a; padding: 20px; text-align: center;">
+                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #94a3b8; margin-bottom: 8px;">TARGET WIDGET</div>
+                <div id="demo-count-box" style="font-size: 2.2rem; font-weight: 800; color: #38bdf8; margin-bottom: 12px; font-family: var(--font-mono);">0</div>
+                <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 8px;">
+                  <button type="button" style="padding: 6px 14px; background: #334155; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: not-allowed;" title="Decrements count">−</button>
+                  <button type="button" style="padding: 6px 14px; background: #6366f1; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: not-allowed;" title="Increments count">+</button>
+                </div>
+                <button type="button" style="padding: 4px 10px; background: transparent; border: 1px solid #475569; color: #94a3b8; font-size: 0.7rem; border-radius: 4px; cursor: not-allowed;">Reset Counter</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Starter Code Download Box -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Get the starter HTML & faulty JS files to begin debugging on your machine.</p>
+            <button onclick="downloadCode('counter-starter.html', getCounterFullStarterPackage())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download Starter HTML
+            </button>
+            <button onclick="downloadCode('counter.js', getCounterStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download counter.js
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="../challenges.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← All Challenges</a>
+            <a href="js-moderate.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: JS Moderate →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getCounterStarterCode() {
+      return `// Faulty Counter Implementation
+// BUG 1: Initialized as string instead of integer
+let count = "0";
+
+// BUG 2: Incorrect selector query (missing dot or ID hash)
+const counterDisplay = document.querySelector('counter-value');
+const btnIncrement = document.getElementById('btn-add');
+const btnDecrement = document.getElementById('btn-sub');
+const btnReset = document.getElementById('btn-clear');
+
+// BUG 3: String concatenation bug: "0" + 1 produces "01"
+function increment() {
+  count = count + 1;
+  updateDisplay();
+}
+
+// BUG 4: Typo in variable name causing ReferenceError
+function decrement() {
+  if (counts > 0) {
+    count = count - 1;
+  }
+  updateDisplay();
+}
+
+// BUG 5: Reset does not change the actual count variable
+function reset() {
+  counterDisplay.innerHTML = "0";
+  // Forgot to update internal state 'count'!
+}
+
+function updateDisplay() {
+  // BUG 6: Property misspelled
+  counterDisplay.textContents = count;
+}
+
+// BUG 7: Missing event listener bindings or wrong event types
+btnIncrement.onclick = increment(); // Runs immediately instead of on click!
+// btnDecrement and btnReset listeners never attached!
+`;
+    }
+
+    function getCounterFullStarterPackage() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Counter Challenge</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .counter-card {
+      background: #1e293b;
+      padding: 32px 48px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    .counter-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin: 16px 0 24px;
+      font-family: monospace;
+    }
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    #btn-add { background: #6366f1; color: white; }
+    #btn-sub { background: #475569; color: white; }
+    #btn-clear { background: transparent; border: 1px solid #64748b; color: #94a3b8; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="counter-card">
+    <h2>Interactive Counter</h2>
+    <div class="counter-value" id="counter-value">0</div>
+    <div class="button-group">
+      <button id="btn-sub">−</button>
+      <button id="btn-add">+</button>
+    </div>
+    <button id="btn-clear">Reset</button>
+  </div>
+  <script src="counter.js"><\/script>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

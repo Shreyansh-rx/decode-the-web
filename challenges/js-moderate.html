@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JavaScript Moderate Challenge: Fix broken shopping cart quantity updates, calculations, and item removals. DECODE THE WEB.">
+  <title>Shopping Cart Repair — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Challenge Detail -->
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--js">JS JavaScript</span>
+          <span class="badge badge--moderate">Moderate</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">10 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">Shopping Cart Repair</h1>
+        <p class="challenge-detail__subtitle">An e-commerce shopping cart module contains state synchronization, math calculation, and DOM removal bugs. Repair the JavaScript cart logic.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <!-- Main Content -->
+        <div class="challenge-detail__main">
+          <!-- Problem Statement -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>An e-commerce web application has an interactive shopping cart drawer. Customers and testing teams have reported critical runtime bugs:</p>
+            <ul>
+              <li>When increasing item quantities, the price does not multiply properly or produces NaN.</li>
+              <li>When decreasing quantity to zero, items remain in the cart with negative quantities.</li>
+              <li>Clicking the "Remove" button removes the HTML item from the screen, but the total price does not update.</li>
+              <li>Floating-point inaccuracies produce weird prices like <code>$59.99000000000001</code> instead of <code>$59.99</code>.</li>
+              <li>When all items are deleted, the cart shows empty rows instead of the "Your cart is empty" placeholder, and the checkout button remains clickable.</li>
+            </ul>
+            <p>Your goal is to refactor and debug the cart logic so state management, calculations, and DOM mutations are completely synchronized.</p>
+          </div>
+
+          <!-- Requirements -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Fix the <strong>updateQuantity(itemId, change)</strong> function to adjust quantities correctly and prevent negative or zero quantities unless removing.</li>
+              <li>Implement accurate price calculations: recalculate item row subtotals (<code class="inline-code">price * quantity</code>) and total order sum.</li>
+              <li>Format all rendered currency values to strictly 2 decimal places using <code class="inline-code">toFixed(2)</code>.</li>
+              <li>Fix the <strong>removeItem(itemId)</strong> function to update the underlying items array and recalculate totals accordingly.</li>
+              <li>Properly handle the empty cart state: show the empty banner message and disable the Checkout button when the cart contains 0 items.</li>
+              <li>Ensure DOM events delegate properly and do not throw uncaught errors when buttons are clicked rapidly.</li>
+            </ul>
+          </div>
+
+          <!-- Expected Behaviour -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Expected Behaviour
+            </h2>
+            <ul>
+              <li>Changing quantity updates both the item row price and the cart total synchronously.</li>
+              <li>Removing an item subtracts its value from the grand total immediately.</li>
+              <li>All displayed monetary figures are formatted as <code class="inline-code">$XX.XX</code>.</li>
+              <li>Empty cart displays a clear "Your cart is empty" notification and disables "Proceed to Checkout".</li>
+              <li>No errors logged in developer console.</li>
+            </ul>
+          </div>
+
+          <!-- Starter Code Preview -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Code Preview
+            </h2>
+            <p>Below is an excerpt of the buggy logic from <code class="inline-code">cart.js</code>:</p>
+
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>cart.js (buggy excerpt)</span>
+                <div>
+                  <button onclick="downloadCode('cart.js', getCartStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download File</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>// Faulty Cart State & Logic
+let cartItems = [
+  { id: 1, name: "Mechanical Keyboard", price: 89.99, qty: 1 },
+  { id: 2, name: "Wireless Gaming Mouse", price: 49.50, qty: 2 },
+  { id: 3, name: "Desk Mat Extended", price: 19.99, qty: 1 }
+];
+
+function updateQuantity(id, delta) {
+  const item = cartItems.find(i =&gt; i.id === id);
+  if (!item) return;
+
+  // BUG 1: Allows negative and zero quantities without removing
+  item.qty += delta; 
+
+  // BUG 2: Direct string concat without type checking in some cases
+  renderCart();
+  // BUG 3: Forgot to call calculateTotal() or passing wrong parameters!
+}
+
+function removeItem(id) {
+  // BUG 4: Splice with wrong index or mutating during loop
+  const index = cartItems.findIndex(i =&gt; i.id == id);
+  // Removes DOM element directly without updating cartItems array!
+  const row = document.getElementById("item-" + id);
+  if (row) row.remove();
+  // State remains unchanged!
+}
+
+function calculateTotal() {
+  let total = 0;
+  // BUG 5: Floating point precision error (e.g. 89.99 + 99.00 results in long floats)
+  for (let i = 0; i &lt;= cartItems.length; i++) { // BUG: off-by-one index error!
+    total += cartItems[i].price * cartItems[i].qty;
+  }
+  // BUG 6: Does not format to 2 decimal places (.toFixed(2) missing)
+  document.getElementById("cart-total").innerText = "$" + total;
+}
+
+function checkEmptyState() {
+  // BUG 7: Always evaluates truthy or ignores length check
+  if (cartItems) {
+    // Checkout button never disables!
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download the starter HTML and JavaScript files into your local directory.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Fix the cart array methods, floating-point precision math, removal handlers, and empty state triggers.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Verify that quantity modifications update subtotals and grand totals correctly, and removing all items shows the empty cart state.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Submit your corrected <code class="inline-code">cart.js</code> file to the competition judges.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">JavaScript</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--moderate">Moderate</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">10</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Target Cart Preview</h3>
+            <div class="preview-box">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+              </div>
+              <div class="preview-box__body" style="background: #0f172a; padding: 16px;">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #f8fafc; margin-bottom: 12px; display: flex; justify-content: space-between;">
+                  <span>🛒 Your Order</span>
+                  <span style="color: #38bdf8;">3 items</span>
+                </div>
+                <div style="background: #1e293b; padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem;">
+                  <div>
+                    <div style="font-weight: 600; color: #e2e8f0;">Mechanical Keyboard</div>
+                    <div style="color: #94a3b8;">$89.99 × 1</div>
+                  </div>
+                  <span style="color: #4ade80; font-weight: 700;">$89.99</span>
+                </div>
+                <div style="background: #1e293b; padding: 8px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem;">
+                  <div>
+                    <div style="font-weight: 600; color: #e2e8f0;">Wireless Mouse</div>
+                    <div style="color: #94a3b8;">$49.50 × 2</div>
+                  </div>
+                  <span style="color: #4ade80; font-weight: 700;">$99.00</span>
+                </div>
+                <div style="border-top: 1px dashed #334155; padding-top: 8px; display: flex; justify-content: space-between; font-weight: 700; font-size: 0.85rem;">
+                  <span style="color: #cbd5e1;">Grand Total:</span>
+                  <span style="color: #38bdf8;">$208.98</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Get the starter HTML & cart.js code files ready for debugging.</p>
+            <button onclick="downloadCode('cart-starter.html', getCartFullStarterPackage())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download Starter HTML
+            </button>
+            <button onclick="downloadCode('cart.js', getCartStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download cart.js
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="js-easy.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← Prev: JS Easy</a>
+            <a href="js-hard.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: JS Hard →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getCartStarterCode() {
+      return `// Faulty Cart State & Logic
+let cartItems = [
+  { id: 1, name: "Mechanical Keyboard", price: 89.99, qty: 1 },
+  { id: 2, name: "Wireless Gaming Mouse", price: 49.50, qty: 2 },
+  { id: 3, name: "Desk Mat Extended", price: 19.99, qty: 1 }
+];
+
+function updateQuantity(id, delta) {
+  const item = cartItems.find(i => i.id === id);
+  if (!item) return;
+
+  // BUG 1: Allows negative and zero quantities without removing
+  item.qty += delta; 
+
+  renderCart();
+  // BUG 2: calculateTotal not updating properly
+}
+
+function removeItem(id) {
+  // BUG 3: Removes DOM element directly without updating cartItems array!
+  const row = document.getElementById("item-" + id);
+  if (row) row.remove();
+  // State remains unchanged!
+}
+
+function calculateTotal() {
+  let total = 0;
+  // BUG 4: Off-by-one index error causing NaN!
+  for (let i = 0; i <= cartItems.length; i++) {
+    total += cartItems[i].price * cartItems[i].qty;
+  }
+  // BUG 5: Does not format to 2 decimal places (.toFixed(2) missing)
+  document.getElementById("cart-total").innerText = "$" + total;
+}
+
+function checkEmptyState() {
+  // BUG 6: Incorrect empty condition check
+  const emptyBanner = document.getElementById("empty-cart-msg");
+  const checkoutBtn = document.getElementById("checkout-btn");
+  if (cartItems.length = 0) { // BUG: Assignment instead of comparison!
+    emptyBanner.style.display = "block";
+    checkoutBtn.disabled = true;
+  }
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items-container");
+  container.innerHTML = "";
+  cartItems.forEach(item => {
+    const row = document.createElement("div");
+    row.id = "item-" + item.id;
+    row.className = "cart-row";
+    row.innerHTML = \`
+      <span>\${item.name}</span>
+      <span>$\${item.price}</span>
+      <button onclick="updateQuantity(\${item.id}, -1)">-</button>
+      <span>\${item.qty}</span>
+      <button onclick="updateQuantity(\${item.id}, 1)">+</button>
+      <button onclick="removeItem(\${item.id})">Remove</button>
+    \`;
+    container.appendChild(row);
+  });
+  calculateTotal();
+  checkEmptyState();
+}
+
+window.onload = renderCart;
+`;
+    }
+
+    function getCartFullStarterPackage() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart Challenge</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 40px; }
+    .cart-container { max-width: 650px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 24px; border: 1px solid #334155; }
+    .cart-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #334155; }
+    button { background: #6366f1; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+    .total-section { margin-top: 20px; text-align: right; font-size: 1.25rem; font-weight: 700; color: #38bdf8; }
+    #empty-cart-msg { display: none; color: #94a3b8; text-align: center; padding: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h2>Shopping Cart</h2>
+    <div id="empty-cart-msg">Your cart is currently empty!</div>
+    <div id="cart-items-container"></div>
+    <div class="total-section">Total: <span id="cart-total">$0.00</span></div>
+    <div style="margin-top: 16px; text-align: right;">
+      <button id="checkout-btn" style="background: #22c55e; padding: 10px 20px; font-weight: bold;">Proceed to Checkout</button>
+    </div>
+  </div>
+  <script src="cart.js"><\/script>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

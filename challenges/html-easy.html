@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HTML Easy Challenge: Fix a broken college registration form. DECODE THE WEB Competition.">
+  <title>Registration Form Repair — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Challenge Detail -->
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span>
+          <span class="badge badge--easy">Easy</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">5 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">Registration Form Repair</h1>
+        <p class="challenge-detail__subtitle">A college registration website has an incorrectly structured form. Your task is to investigate the HTML and fix all structural issues.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <!-- Main Content -->
+        <div class="challenge-detail__main">
+          <!-- Problem Statement -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>You have been given a college registration form that is not working correctly. The form has several HTML issues that prevent it from functioning as intended. Users cannot submit the form properly, fields are missing labels, and the semantic structure is incorrect.</p>
+            <p>Your job is to examine the HTML source code, identify all the bugs, and fix them so the form works correctly and follows best practices.</p>
+          </div>
+
+          <!-- Requirements -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Correct the overall HTML document structure (missing or misplaced tags).</li>
+              <li>Fix incorrect or missing <code class="inline-code">input</code> attributes (type, name, id, required, placeholder).</li>
+              <li>Add appropriate <code class="inline-code">&lt;label&gt;</code> elements with correct <code class="inline-code">for</code> attributes linked to inputs.</li>
+              <li>Replace non-semantic elements with correct semantic HTML (e.g., <code class="inline-code">&lt;form&gt;</code>, <code class="inline-code">&lt;fieldset&gt;</code>, <code class="inline-code">&lt;legend&gt;</code>).</li>
+              <li>Fix the form hierarchy — ensure all inputs are properly nested inside the form element.</li>
+              <li>Add a working submit button with the correct type attribute.</li>
+            </ul>
+          </div>
+
+          <!-- Expected Behaviour -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Expected Behaviour
+            </h2>
+            <p>When correctly fixed, the registration form should:</p>
+            <ul>
+              <li>Display all form fields with proper labels.</li>
+              <li>Validate required fields before submission.</li>
+              <li>Use correct input types (email, tel, text, password, etc.).</li>
+              <li>Have a logical, accessible form structure.</li>
+              <li>Submit the form data when the submit button is clicked (no backend required — just correct HTML behaviour).</li>
+            </ul>
+          </div>
+
+          <!-- Starter Code Preview -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Code Preview
+            </h2>
+            <p>Below is a snippet of the broken code you'll be working with:</p>
+
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>registration.html</span>
+                <div>
+                  <button onclick="downloadCurrentCode(this, 'registration.html')" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download File</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;College Registration&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="form-container"&gt;
+    &lt;h1&gt;Student Registration&lt;/h1&gt;
+    
+    &lt;!-- BUG: No &lt;form&gt; element wrapping the inputs --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;!-- BUG: Missing label elements --&gt;
+      &lt;span&gt;Full Name&lt;/span&gt;
+      &lt;input type="text" placeholder="Enter name"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;span&gt;Email Address&lt;/span&gt;
+      &lt;!-- BUG: Wrong input type --&gt;
+      &lt;input type="text" placeholder="Enter email"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;span&gt;Phone Number&lt;/span&gt;
+      &lt;!-- BUG: Wrong input type, missing attributes --&gt;
+      &lt;input placeholder="Enter phone"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;span&gt;Password&lt;/span&gt;
+      &lt;!-- BUG: Wrong type and missing validation --&gt;
+      &lt;input type="text" placeholder="Enter password"&gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-group"&gt;
+      &lt;span&gt;Course&lt;/span&gt;
+      &lt;!-- BUG: Select element issues --&gt;
+      &lt;input type="text" placeholder="Select course"&gt;
+    &lt;/div&gt;
+
+    &lt;!-- BUG: Button outside form, wrong type --&gt;
+    &lt;div class="btn" onclick="alert('clicked')"&gt;Register&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Download the starter files and open them in VS Code.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Fix all the identified HTML issues in the registration form.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Test your solution by opening the file in a browser.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Submit your corrected file to the organizers before the deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">HTML</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--easy">Easy</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Preview</h3>
+            <div class="preview-box">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+              </div>
+              <div class="preview-box__body" style="background: #1a1a2e; padding: 20px;">
+                <div style="width: 100%; font-family: var(--font-sans);">
+                  <div style="text-align: center; margin-bottom: 16px;">
+                    <div style="font-size: 1rem; font-weight: 700; color: #e2e8f0;">Student Registration</div>
+                    <div style="font-size: 0.7rem; color: #64748b;">College Registration Form</div>
+                  </div>
+                  <div style="margin-bottom: 8px;">
+                    <div style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 3px;">Full Name</div>
+                    <div style="background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 6px 8px; font-size: 0.6rem; color: #64748b;">Enter your name</div>
+                  </div>
+                  <div style="margin-bottom: 8px;">
+                    <div style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 3px;">Email</div>
+                    <div style="background: #0f172a; border: 1px solid #ef4444; border-radius: 4px; padding: 6px 8px; font-size: 0.6rem; color: #ef4444;">⚠ Missing type attribute</div>
+                  </div>
+                  <div style="margin-bottom: 10px;">
+                    <div style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 3px;">Password</div>
+                    <div style="background: #0f172a; border: 1px solid #ef4444; border-radius: 4px; padding: 6px 8px; font-size: 0.6rem; color: #ef4444;">⚠ Visible as plain text</div>
+                  </div>
+                  <div style="background: linear-gradient(135deg, #a855f7, #3b82f6); padding: 6px; border-radius: 4px; text-align: center; font-size: 0.65rem; font-weight: 600; color: #fff;">Register</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Download the registration form starter file to start debugging.</p>
+            <button onclick="downloadCode('registration.html', document.querySelector('.code-block pre').textContent)" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download registration.html
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="../challenges.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← All Challenges</a>
+            <a href="html-moderate.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: HTML Moderate →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

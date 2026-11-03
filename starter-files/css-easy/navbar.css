@@ -1,0 +1,37 @@
+/* Broken Navigation CSS */
+
+.navbar {
+  /* BUG: No positioning — should be fixed */
+  background-color: white; /* BUG: Should be dark */
+  padding: 0; /* BUG: Needs padding */
+  /* BUG: Missing width */
+}
+
+.navbar-container {
+  /* BUG: Not using flexbox */
+  display: block;
+  /* BUG: No max-width or centering */
+}
+
+.navbar-logo {
+  /* BUG: No styling */
+  font-size: 12px;
+  color: gray;
+}
+
+.navbar-links {
+  /* BUG: Links are stacking vertically */
+  display: block;
+  list-style: disc; /* BUG: Bullets showing */
+}
+
+.navbar-links li {
+  /* BUG: Block display causing vertical stack */
+  display: block;
+  margin: 0; /* BUG: No spacing */
+}
+
+.navbar-links a {
+  color: black; /* BUG: Wrong color */
+  text-decoration: underline; /* BUG: Should remove underline */
+}

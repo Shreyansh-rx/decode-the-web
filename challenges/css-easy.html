@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSS Easy Challenge: Fix a broken navigation bar with incorrect spacing and alignment. DECODE THE WEB Competition.">
+  <title>Broken Navigation Bar — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--css">{ } CSS</span>
+          <span class="badge badge--easy">Easy</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">5 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">Broken Navigation Bar</h1>
+        <p class="challenge-detail__subtitle">A navigation bar has incorrect spacing, alignment, colors, and positioning. Fix the CSS to match the reference design.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <div class="challenge-detail__main">
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>A company website has a navigation bar that looks completely wrong. The links are stacked vertically instead of horizontally, the logo is misaligned, colors are off, and the hover effects don't work. The HTML structure is correct — only the CSS needs to be fixed.</p>
+            <p>Your task is to debug and fix the CSS so the navigation bar matches the provided reference design screenshot.</p>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Fix the layout so navigation links appear <strong>horizontally</strong> in a row (use Flexbox).</li>
+              <li>Correct the spacing between navigation items (consistent gap of 24px).</li>
+              <li>Align the logo to the left and links to the right.</li>
+              <li>Fix the background colour to a dark navy (<code class="inline-code">#1e293b</code>).</li>
+              <li>Make links white with a purple hover effect.</li>
+              <li>Fix the navbar to stay at the top of the page (sticky/fixed positioning).</li>
+              <li>Add smooth transition effects on hover.</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Visual Reference & Preview
+            </h2>
+            <p>Below is the visual target. Toggle between the <strong>Expected Design</strong> and the <strong>Current Broken State</strong> to inspect the differences in layout, alignment, colors, and positioning.</p>
+
+            <!-- Large Preview Box -->
+            <div class="preview-box preview-box--lg">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+                <div class="preview-box__address-bar">
+                  <span>🔒</span>
+                  <span>http://localhost:3000/broken-navbar/index.html</span>
+                </div>
+                <div style="display: flex; gap: 6px; margin-left: auto;">
+                  <button type="button" class="preview-tab-btn active" onclick="switchPreviewTab(this, 'expected')" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ✅ Expected Design
+                  </button>
+                  <button type="button" class="preview-tab-btn" onclick="switchPreviewTab(this, 'broken')" style="background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ❌ Current Broken
+                  </button>
+                </div>
+              </div>
+
+              <!-- View 1: Expected State -->
+              <div class="preview-box__body preview-view-pane" data-pane="expected" style="display: block; background: #0b1329; padding: 24px; width: 100%;">
+                <div style="background: #1e293b; border-radius: 8px; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #334155; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #a855f7, #3b82f6); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; color: white;">⚡</div>
+                    <span style="font-weight: 700; color: #f8fafc; font-size: 1rem; letter-spacing: 0.5px;">ApexCode</span>
+                  </div>
+                  <div style="display: flex; gap: 24px; align-items: center;">
+                    <span style="color: #a855f7; font-weight: 600; font-size: 0.88rem; border-bottom: 2px solid #a855f7; padding-bottom: 4px;">Home</span>
+                    <span style="color: #cbd5e1; font-size: 0.88rem; cursor: pointer;">Features</span>
+                    <span style="color: #cbd5e1; font-size: 0.88rem; cursor: pointer;">Pricing</span>
+                    <span style="color: #cbd5e1; font-size: 0.88rem; cursor: pointer;">Contact</span>
+                    <span style="background: #6366f1; color: white; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Sign Up</span>
+                  </div>
+                </div>
+                <div style="margin-top: 24px; padding: 20px; background: rgba(30, 41, 59, 0.4); border-radius: 6px; border: 1px dashed #334155; text-align: center; color: #94a3b8; font-size: 0.85rem;">
+                  ✨ Content below navbar scrolls smoothly while navbar stays fixed at top with dark navy background and flex alignment.
+                </div>
+              </div>
+
+              <!-- View 2: Broken State -->
+              <div class="preview-box__body preview-view-pane" data-pane="broken" style="display: none; background: #ffffff; padding: 24px; width: 100%;">
+                <div style="background: #ffffff; border: 2px solid #ef4444; border-radius: 6px; padding: 16px;">
+                  <div style="color: gray; font-size: 12px; margin-bottom: 10px;">ApexCode Portal (gray, unstyled)</div>
+                  <ul style="list-style-type: disc; margin-left: 20px; color: black; line-height: 1.8;">
+                    <li><span style="color: black; text-decoration: underline;">Home</span></li>
+                    <li><span style="color: black; text-decoration: underline;">Features</span></li>
+                    <li><span style="color: black; text-decoration: underline;">Pricing</span></li>
+                    <li><span style="color: black; text-decoration: underline;">Contact</span></li>
+                  </ul>
+                </div>
+                <div style="margin-top: 16px; padding: 10px; background: #fee2e2; border-radius: 6px; color: #b91c1c; font-size: 0.82rem; font-weight: 600; text-align: center;">
+                  ❌ Bugs: White background, block layout stacking vertically, ugly bullet points, unstyled font.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to Verify Your Work Card -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              How to Test & Verify Your Solution
+            </h2>
+            <p>You test your changes directly in your browser without any special tools or backend:</p>
+            <div class="verification-guide">
+              <ol>
+                <li><strong>Download Both Files:</strong> Download <code>navbar.css</code> and the companion <code>index.html</code> (available below or in the sidebar) into the <strong>same folder</strong> on your computer.</li>
+                <li><strong>Open <code>index.html</code> in Browser:</strong> Double-click <code>index.html</code> to open it in Chrome, Firefox, or Edge. You will immediately see the broken navigation bar.</li>
+                <li><strong>Edit <code>navbar.css</code> in VS Code:</strong> Open the folder in VS Code or any text editor. Modify the CSS properties in <code>navbar.css</code> and save the file (<code>Ctrl + S</code>).</li>
+                <li><strong>Refresh to Check:</strong> Switch back to your browser and press <code>F5</code> / <code>Ctrl + R</code>. Your CSS changes will immediately render!</li>
+                <li><strong>Check Parity with Expected Design:</strong> Compare your browser view against the <strong>✅ Expected Design</strong> preview above. Verify that the navbar is sticky when you scroll, links are in a single horizontal row, and hover effects work smoothly.</li>
+                <li><strong>Use Browser DevTools:</strong> Press <code>F12</code> to open DevTools, select elements in the <strong>Elements</strong> tab, and verify computed padding, margins, and flexbox styles in the <strong>Computed</strong> tab.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Starter Code Preview with Tabs -->
+          <div class="detail-card code-tab-container">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Files (CSS & Companion HTML)
+            </h2>
+            <p>You will modify <strong>navbar.css</strong>. We also provide the companion <strong>index.html</strong> so you can open it in your browser to test your styles in real time.</p>
+
+            <div class="code-tabs">
+              <button type="button" class="code-tab-btn active" onclick="switchCodeTab(this, 'tab-css')">📄 navbar.css (Broken CSS to Edit)</button>
+              <button type="button" class="code-tab-btn" onclick="switchCodeTab(this, 'tab-html')">🌐 index.html (Companion Test Page)</button>
+            </div>
+
+            <!-- Tab 1: CSS -->
+            <div class="code-block code-tab-pane" id="tab-css" style="display: block; margin-top: 0;">
+              <div class="code-block__header">
+                <span>navbar.css (file to fix)</span>
+                <div>
+                  <button onclick="downloadCode('navbar.css', getNavbarCssStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download navbar.css</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>/* Broken Navigation CSS */
+
+.navbar {
+  /* BUG: No positioning — should be fixed */
+  background-color: white; /* BUG: Should be dark navy (#1e293b) */
+  padding: 0; /* BUG: Needs vertical & horizontal padding */
+  /* BUG: Missing width: 100% and top: 0 */
+}
+
+.navbar-container {
+  /* BUG: Not using flexbox */
+  display: block;
+  /* BUG: No max-width or centering */
+}
+
+.navbar-logo {
+  /* BUG: No styling */
+  font-size: 12px;
+  color: gray;
+}
+
+.navbar-links {
+  /* BUG: Links are stacking vertically */
+  display: block;
+  list-style: disc; /* BUG: Bullets showing */
+}
+
+.navbar-links li {
+  /* BUG: Block display causing vertical stack */
+  display: block;
+  margin: 0; /* BUG: No spacing */
+}
+
+.navbar-links a {
+  color: black; /* BUG: Wrong color — should be white */
+  text-decoration: underline; /* BUG: Remove underline */
+  /* BUG: Missing hover transitions */
+}
+
+/* Missing: .navbar-links a:hover, active indicators, sticky positioning */</code></pre>
+              </div>
+            </div>
+
+            <!-- Tab 2: Companion HTML -->
+            <div class="code-block code-tab-pane" id="tab-html" style="display: none; margin-top: 0;">
+              <div class="code-block__header">
+                <span>index.html (companion markup to open in browser)</span>
+                <div>
+                  <button onclick="downloadCode('index.html', getNavbarHtmlStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download index.html</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Broken Navigation Bar - CSS Easy Challenge&lt;/title&gt;
+  &lt;link rel="stylesheet" href="navbar.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav class="navbar"&gt;
+    &lt;div class="navbar-container"&gt;
+      &lt;div class="navbar-logo"&gt;ApexCode Portal&lt;/div&gt;
+      &lt;ul class="navbar-links"&gt;
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#features"&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+  &lt;main style="padding: 120px 20px; font-family: sans-serif;"&gt;
+    &lt;h1&gt;Fix the Broken Navigation Bar&lt;/h1&gt;
+    &lt;p&gt;Edit navbar.css and refresh this page in your browser to verify your styling changes in real time.&lt;/p&gt;
+    &lt;div style="height: 1000px; background: #1e293b; border-radius: 8px; margin-top: 30px; padding: 20px; color: #94a3b8;"&gt;
+      Scroll down to verify that the navbar remains fixed at the top of the viewport!
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download both <code>navbar.css</code> and <code>index.html</code> into the same folder and open in VS Code.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Fix all styling and layout bugs in <code>navbar.css</code> to match the expected design without altering the HTML structure.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Refresh your browser and scroll the page to verify that the navigation bar sticks to the top and looks perfect.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Submit your corrected <code>navbar.css</code> file to the organizers before the deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">CSS</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--easy">Easy</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Get the starter files to test locally in your browser.</p>
+            <button onclick="downloadCode('navbar.css', getNavbarCssStarterCode())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download navbar.css
+            </button>
+            <button onclick="downloadCode('index.html', getNavbarHtmlStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download index.html
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="html-hard.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← HTML Hard</a>
+            <a href="css-moderate.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: CSS Moderate →</a>
+          </div>
+        </aside>
+            <a href="html-hard.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← HTML Hard</a>
+            <a href="css-moderate.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: CSS Moderate →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getNavbarCssStarterCode() {
+      return `/* Broken Navigation CSS */
+
+.navbar {
+  /* BUG: No positioning — should be fixed */
+  background-color: white; /* BUG: Should be dark navy (#1e293b) */
+  padding: 0; /* BUG: Needs vertical & horizontal padding */
+  /* BUG: Missing width: 100% and top: 0 */
+}
+
+.navbar-container {
+  /* BUG: Not using flexbox */
+  display: block;
+  /* BUG: No max-width or centering */
+}
+
+.navbar-logo {
+  /* BUG: No styling */
+  font-size: 12px;
+  color: gray;
+}
+
+.navbar-links {
+  /* BUG: Links are stacking vertically */
+  display: block;
+  list-style: disc; /* BUG: Bullets showing */
+}
+
+.navbar-links li {
+  /* BUG: Block display causing vertical stack */
+  display: block;
+  margin: 0; /* BUG: No spacing */
+}
+
+.navbar-links a {
+  color: black; /* BUG: Wrong color — should be white */
+  text-decoration: underline; /* BUG: Remove underline */
+}
+`;
+    }
+
+    function getNavbarHtmlStarterCode() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broken Navigation Bar - CSS Easy Challenge</title>
+  <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">ApexCode Portal</div>
+      <ul class="navbar-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main style="padding: 120px 20px; font-family: sans-serif;">
+    <h1>Fix the Broken Navigation Bar</h1>
+    <p>Edit navbar.css and refresh this page in your browser to verify your styling changes in real time.</p>
+    <div style="height: 1000px; background: #1e293b; border-radius: 8px; margin-top: 30px; padding: 20px; color: #94a3b8;">
+      Scroll down to verify that the navbar remains fixed at the top of the viewport!
+    </div>
+  </main>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

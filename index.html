@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DECODE THE WEB — A frontend development competition testing HTML, CSS, and JavaScript skills. Think Like a Developer. Debug Like a Pro.">
+  <title>DECODE THE WEB — Frontend Development Competition</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="bg-glow bg-glow--cyan"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link active">Home</a>
+        <a href="challenges.html" class="nav__link">Challenges</a>
+        <a href="rules.html" class="nav__link">Rules</a>
+        <a href="about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="hero__badge-dot"></span>
+          Frontend Development Competition
+        </div>
+
+        <h1 class="hero__title">
+          Think Like a Developer.<br>
+          <span>Debug Like a Pro.</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          An exciting frontend development competition where you investigate broken websites, 
+          identify bugs, and demonstrate your HTML, CSS, and JavaScript skills.
+        </p>
+
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <div class="hero__stat-value">105</div>
+            <div class="hero__stat-label">Max Points</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">3</div>
+            <div class="hero__stat-label">Categories</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">E→H</div>
+            <div class="hero__stat-label">Difficulty</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">9</div>
+            <div class="hero__stat-label">Total Tasks</div>
+          </div>
+        </div>
+
+        <div class="hero__actions">
+          <a href="challenges.html" class="btn btn--primary">
+            <span>Explore Challenges</span>
+            <span class="btn--icon">→</span>
+          </a>
+          <a href="rules.html" class="btn btn--secondary">
+            <span>View Rules</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tagline Section -->
+  <section class="section" id="tagline">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Our Motto</div>
+        <h2 class="section__title">"Break It. <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Debug It.</span> Decode It."</h2>
+        <p class="section__desc">Master the art of frontend debugging through hands-on challenges across three core web technologies.</p>
+      </div>
+
+      <!-- Tech Categories Preview -->
+      <div class="steps animate-on-scroll" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 0;">
+        <div class="step" style="border-top: 3px solid #e34f26;">
+          <div class="step__number" style="background: #e34f26;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">&lt;/&gt;</span>
+          </div>
+          <h3 class="step__title">HTML</h3>
+          <p class="step__desc">Fix broken markup, repair form structures, and investigate DOM inconsistencies.</p>
+        </div>
+        <div class="step" style="border-top: 3px solid #264de4;">
+          <div class="step__number" style="background: #264de4;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">{ }</span>
+          </div>
+          <h3 class="step__title">CSS</h3>
+          <p class="step__desc">Debug layouts, fix responsive breakpoints, and untangle specificity conflicts.</p>
+        </div>
+        <div class="step" style="border-top: 3px solid #f0db4f;">
+          <div class="step__number" style="background: #f0db4f; color: #000;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">JS</span>
+          </div>
+          <h3 class="step__title">JavaScript</h3>
+          <p class="step__desc">Repair event handlers, fix async bugs, and correct runtime logic errors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Process</div>
+        <h2 class="section__title">How It Works</h2>
+        <p class="section__desc">Follow these steps to tackle each challenge and submit your solutions.</p>
+      </div>
+
+      <div class="steps animate-on-scroll">
+        <div class="step">
+          <div class="step__number"></div>
+          <h3 class="step__title">Select Category</h3>
+          <p class="step__desc">Choose from HTML, CSS, or JavaScript technology categories.</p>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <h3 class="step__title">Open Challenge</h3>
+          <p class="step__desc">Read the problem statement and download the starter files.</p>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <h3 class="step__title">Inspect & Debug</h3>
+          <p class="step__desc">Investigate the provided website and starter code using DevTools.</p>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <h3 class="step__title">Fix the Bugs</h3>
+          <p class="step__desc">Implement the required fixes and verify correct behaviour.</p>
+        </div>
+        <div class="step">
+          <div class="step__number"></div>
+          <h3 class="step__title">Submit Work</h3>
+          <p class="step__desc">Submit your completed solutions to the organizers before the deadline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenge Preview -->
+  <section class="section" id="preview">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Challenges</div>
+        <h2 class="section__title">9 Challenges Await</h2>
+        <p class="section__desc">From easy form fixes to complex debugging puzzles — test your frontend skills at every level.</p>
+      </div>
+
+      <div class="challenges-grid animate-on-scroll">
+        <!-- HTML Challenges -->
+        <div class="challenge-card category--html">
+          <div class="challenge-card__header">
+            <span class="challenge-card__category">&lt;HTML&gt;</span>
+            <span class="badge badge--easy">Easy</span>
+          </div>
+          <div class="challenge-card__body">
+            <h3 class="challenge-card__title">Registration Form Repair</h3>
+            <p class="challenge-card__desc">Fix an incorrectly structured college registration form with broken HTML elements.</p>
+            <div class="challenge-card__meta">
+              <span class="challenge-card__meta-item"><span class="challenge-card__meta-icon">🏆</span> 5 pts</span>
+            </div>
+          </div>
+          <div class="challenge-card__footer">
+            <span class="challenge-card__points">5 Points</span>
+            <a href="challenges/html-easy.html" class="challenge-card__btn">Open →</a>
+          </div>
+        </div>
+
+        <div class="challenge-card category--css">
+          <div class="challenge-card__header">
+            <span class="challenge-card__category">&lt;CSS&gt;</span>
+            <span class="badge badge--moderate">Moderate</span>
+          </div>
+          <div class="challenge-card__body">
+            <h3 class="challenge-card__title">Dashboard Layout Repair</h3>
+            <p class="challenge-card__desc">Fix broken Grid and Flexbox layouts in a dashboard interface.</p>
+            <div class="challenge-card__meta">
+              <span class="challenge-card__meta-item"><span class="challenge-card__meta-icon">🏆</span> 10 pts</span>
+            </div>
+          </div>
+          <div class="challenge-card__footer">
+            <span class="challenge-card__points">10 Points</span>
+            <a href="challenges/css-moderate.html" class="challenge-card__btn">Open →</a>
+          </div>
+        </div>
+
+        <div class="challenge-card category--js">
+          <div class="challenge-card__header">
+            <span class="challenge-card__category">&lt;JavaScript&gt;</span>
+            <span class="badge badge--hard">Hard</span>
+          </div>
+          <div class="challenge-card__body">
+            <h3 class="challenge-card__title">The Broken Dashboard</h3>
+            <p class="challenge-card__desc">Debug complex runtime issues including async updates and race conditions.</p>
+            <div class="challenge-card__meta">
+              <span class="challenge-card__meta-item"><span class="challenge-card__meta-icon">🏆</span> 20 pts</span>
+            </div>
+          </div>
+          <div class="challenge-card__footer">
+            <span class="challenge-card__points">20 Points</span>
+            <a href="challenges/js-hard.html" class="challenge-card__btn">Open →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+        <a href="challenges.html" class="btn btn--primary">
+          <span>View All 9 Challenges</span>
+          <span class="btn--icon">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="challenges.html" class="footer__link">Challenges</a>
+          <a href="rules.html" class="footer__link">Rules</a>
+          <a href="about.html" class="footer__link">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

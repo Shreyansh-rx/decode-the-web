@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration - Broken Starter</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 40px; }
+    .form-container { max-width: 500px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 12px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group span { display: block; font-size: 0.85rem; margin-bottom: 6px; color: #94a3b8; }
+    input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: white; box-sizing: border-box; }
+    .btn { display: inline-block; width: 100%; text-align: center; background: #6366f1; color: white; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Student Registration</h1>
+    
+    <!-- BUG: No <form> element wrapping the inputs -->
+    <div class="form-group">
+      <!-- BUG: Missing label elements -->
+      <span>Full Name</span>
+      <input type="text" placeholder="Enter name">
+    </div>
+    
+    <div class="form-group">
+      <span>Email Address</span>
+      <!-- BUG: Wrong input type -->
+      <input type="text" placeholder="Enter email">
+    </div>
+    
+    <div class="form-group">
+      <span>Phone Number</span>
+      <!-- BUG: Wrong input type, missing attributes -->
+      <input placeholder="Enter phone">
+    </div>
+    
+    <div class="form-group">
+      <span>Password</span>
+      <!-- BUG: Wrong type and missing validation -->
+      <input type="text" placeholder="Enter password">
+    </div>
+
+    <div class="form-group">
+      <span>Course</span>
+      <!-- BUG: Should be <select> with options -->
+      <input type="text" placeholder="Select course">
+    </div>
+
+    <!-- BUG: Non-semantic div button outside form -->
+    <div class="btn" onclick="alert('Submission failed - no form element found!')">Register</div>
+  </div>
+</body>
+</html>

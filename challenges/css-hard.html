@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSS Hard Challenge: Debug a complex landing page with CSS specificity and responsive issues. DECODE THE WEB Competition.">
+  <title>The CSS Mystery — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--css">{ } CSS</span>
+          <span class="badge badge--hard">Hard</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">20 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">The CSS Mystery</h1>
+        <p class="challenge-detail__subtitle">A complex landing page renders differently at different screen sizes. Investigate CSS specificity, conflicting selectors, and computed styles to fix it.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <div class="challenge-detail__main">
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>A client's landing page looks perfect in the designer's mockup, but the actual implementation has mysterious CSS issues. At desktop width it looks mostly correct, but elements shift, overlap, and disappear at different screen sizes. The CSS file contains multiple conflicting selectors, specificity wars, incorrect use of <code class="inline-code">!important</code>, inheritance issues, and broken media queries.</p>
+            <p>This is not about writing new CSS — it's about <strong>investigating</strong> existing CSS to understand why things break. You need to use the browser's Computed Styles panel, trace which selectors are winning, and fix the conflicts.</p>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Investigate CSS specificity conflicts — identify which selectors are overriding intended styles and fix them.</li>
+              <li>Remove or fix incorrect <code class="inline-code">!important</code> declarations that are causing side effects.</li>
+              <li>Debug CSS inheritance issues — some child elements are inheriting colours/fonts they shouldn't.</li>
+              <li>Inspect computed styles in DevTools to understand what the browser is actually applying.</li>
+              <li>Fix overlapping elements caused by conflicting <code class="inline-code">position</code>, <code class="inline-code">z-index</code>, and <code class="inline-code">transform</code> properties.</li>
+              <li>Repair broken media queries that have incorrect breakpoints, conflicting rules, or are in the wrong order.</li>
+              <li>Ensure the page renders consistently across 320px, 768px, 1024px, and 1440px widths.</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Visual Reference & Target Preview
+            </h2>
+            <p>Below is the visual target. Toggle between the <strong>Expected Landing Page</strong> and the <strong>Current Broken State</strong> to inspect the specificity and media query conflicts.</p>
+
+            <!-- Large Preview Box -->
+            <div class="preview-box preview-box--lg">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+                <div class="preview-box__address-bar">
+                  <span>🔒</span>
+                  <span>http://localhost:3000/cloud-platform/index.html</span>
+                </div>
+                <div style="display: flex; gap: 6px; margin-left: auto;">
+                  <button type="button" class="preview-tab-btn active" onclick="switchPreviewTab(this, 'expected')" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ✅ Expected Landing Page
+                  </button>
+                  <button type="button" class="preview-tab-btn" onclick="switchPreviewTab(this, 'broken')" style="background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ❌ Current Broken
+                  </button>
+                </div>
+              </div>
+
+              <!-- View 1: Expected State -->
+              <div class="preview-box__body preview-view-pane" data-pane="expected" style="display: block; background: #0f172a; padding: 24px; width: 100%;">
+                <div style="background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(59,130,246,0.15)); border: 1px solid #334155; border-radius: 8px; padding: 28px; text-align: center; margin-bottom: 20px;">
+                  <div style="font-size: 1.8rem; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">Next-Gen Cloud Platform</div>
+                  <p style="color: #94a3b8; font-size: 0.85rem; max-width: 500px; margin: 0 auto 16px;">Serverless compute, global edge routing, and automated container orchestration.</p>
+                  <button style="padding: 8px 20px; background: #6366f1; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Deploy Project Now →</button>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                  <div style="background: #1e293b; padding: 14px; border-radius: 6px; border: 1px solid #334155;">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">⚡ Edge Compute</div>
+                    <div style="font-size: 0.72rem; color: #94a3b8;">Sub-millisecond execution times around the globe.</div>
+                  </div>
+                  <div style="background: #1e293b; padding: 14px; border-radius: 6px; border: 1px solid #334155;">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #a855f7; margin-bottom: 4px;">🔒 Zero-Trust Security</div>
+                    <div style="font-size: 0.72rem; color: #94a3b8;">Automated mTLS and hardware security key validation.</div>
+                  </div>
+                  <div style="background: #1e293b; padding: 14px; border-radius: 6px; border: 1px solid #334155;">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #4ade80; margin-bottom: 4px;">📈 Realtime Scale</div>
+                    <div style="font-size: 0.72rem; color: #94a3b8;">Scale from zero to millions of requests seamlessly.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- View 2: Broken State -->
+              <div class="preview-box__body preview-view-pane" data-pane="broken" style="display: none; background: #0f172a; padding: 24px; width: 100%;">
+                <div style="border: 2px solid #ef4444; border-radius: 8px; padding: 20px; background: #1e293b;">
+                  <div style="color: red; font-size: 1rem; font-weight: bold; margin-bottom: 8px;">Next-Gen Cloud Platform (Title overridden by red !important and font-size: 1rem)</div>
+                  <div style="color: #f87171; background: rgba(239,68,68,0.1); padding: 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 12px;">
+                    ⚠️ Specificity conflict: <code>section.hero div.content h1.title</code> has <code>!important</code> overriding intended styles!
+                  </div>
+                  <div style="color: #f87171; background: rgba(239,68,68,0.1); padding: 8px; border-radius: 4px; font-size: 0.75rem;">
+                    ⚠️ Media queries defined in reverse order: <code>@media (max-width: 1024px)</code> overrides <code>@media (max-width: 768px)</code>, forcing 1-column layout on all screens!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to Verify Your Work Card -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              How to Test & Verify Your Solution
+            </h2>
+            <p>Use browser Developer Tools to investigate and confirm your CSS fixes:</p>
+            <div class="verification-guide">
+              <ol>
+                <li><strong>Download Both Files:</strong> Download <code>mystery.css</code> and the companion <code>index.html</code> (available below or in the sidebar) into the <strong>same folder</strong>.</li>
+                <li><strong>Open in Browser:</strong> Double-click <code>index.html</code> to open it in Chrome or Firefox.</li>
+                <li><strong>Inspect Specificity in DevTools:</strong> Press <code>F12</code>, click the Element picker, and click on the main heading. Switch to the <strong>Computed</strong> tab to see why the font color and size are overridden. In the <strong>Styles</strong> panel, look for struck-through rules and conflicting <code>!important</code> declarations.</li>
+                <li><strong>Edit & Fix:</strong> In VS Code, clean up the selector specificity hierarchy and fix the media query ordering in <code>mystery.css</code>. Save your file (<code>Ctrl + S</code>).</li>
+                <li><strong>Refresh & Test Responsiveness:</strong> Refresh your browser (<code>F5</code>) and resize the viewport. Confirm that cards display in 3 columns on desktop, 2 columns on tablet (768px), and 1 column on mobile (480px).</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              Investigation Tips
+            </h2>
+            <div class="info-box" style="margin: 0 0 16px 0;">
+              <div class="info-box__title">💡 Use the Computed Tab</div>
+              <p class="info-box__text">
+                In Chrome/Firefox DevTools, select an element and switch to the <strong>Computed</strong> tab. This shows you the <em>final</em> value of every CSS property after all specificity rules, inheritance, and cascade have been resolved. Click the arrow next to any property to see which exact rule is setting its value.
+              </p>
+            </div>
+            <div class="info-box" style="margin: 0;">
+              <div class="info-box__title">💡 Check the CSS Cascade</div>
+              <p class="info-box__text">
+                In the <strong>Styles</strong> panel, struck-through properties are being overridden. Check the selector specificity to understand why. Remember: inline styles &gt; ID &gt; class &gt; element. <code class="inline-code">!important</code> overrides everything — but only until another <code class="inline-code">!important</code> with higher specificity appears.
+              </p>
+            </div>
+          </div>
+
+          <!-- Starter Code Preview with Tabs -->
+          <div class="detail-card code-tab-container">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Files (CSS & Companion HTML)
+            </h2>
+            <p>You will modify <strong>mystery.css</strong>. We also provide the companion <strong>index.html</strong> so you can open it in your browser to test your styles in real time.</p>
+
+            <div class="code-tabs">
+              <button type="button" class="code-tab-btn active" onclick="switchCodeTab(this, 'tab-myst-css')">📄 mystery.css (Broken CSS to Edit)</button>
+              <button type="button" class="code-tab-btn" onclick="switchCodeTab(this, 'tab-myst-html')">🌐 index.html (Companion Test Page)</button>
+            </div>
+
+            <!-- Tab 1: CSS -->
+            <div class="code-block code-tab-pane" id="tab-myst-css" style="display: block; margin-top: 0;">
+              <div class="code-block__header">
+                <span>mystery.css (file to fix)</span>
+                <div>
+                  <button onclick="downloadCode('mystery.css', getMysteryCssStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download mystery.css</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>/* Conflicting specificity example */
+
+.hero .content h1 {
+  color: #1e293b;
+  font-size: 3rem;
+}
+
+/* Higher specificity — overrides the above */
+section.hero div.content h1.title {
+  color: red !important; /* BUG: Wrong color + !important */
+  font-size: 1rem; /* BUG: Way too small */
+}
+
+/* This tries to fix it but can't win */
+h1 {
+  color: #0f172a;
+  font-size: 3.5rem;
+}
+
+/* Media query issues */
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* BUG: This overrides the above because it comes after */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: 1fr; /* Should be for mobile only */
+  }
+}
+
+/* Overlapping z-index chaos */
+.hero { z-index: 100; position: relative; }
+.nav { z-index: 50; position: fixed; } /* BUG: Nav behind hero */
+.modal { z-index: 10; } /* BUG: Modal behind everything */</code></pre>
+              </div>
+            </div>
+
+            <!-- Tab 2: Companion HTML -->
+            <div class="code-block code-tab-pane" id="tab-myst-html" style="display: none; margin-top: 0;">
+              <div class="code-block__header">
+                <span>index.html (companion markup to open in browser)</span>
+                <div>
+                  <button onclick="downloadCode('index.html', getMysteryHtmlStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download index.html</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;The CSS Mystery - CSS Hard Challenge&lt;/title&gt;
+  &lt;link rel="stylesheet" href="mystery.css"&gt;
+  &lt;style&gt;
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
+    .hero { padding: 60px 20px; background: #1e293b; text-align: center; }
+    .features-grid { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .card { background: #1e293b; padding: 24px; border-radius: 8px; border: 1px solid #334155; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;section class="hero"&gt;
+    &lt;div class="content"&gt;
+      &lt;h1 class="title"&gt;Next-Gen Cloud Platform&lt;/h1&gt;
+      &lt;p&gt;Investigate the CSS specificity rules and media queries causing styling conflicts.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;div class="features-grid"&gt;
+    &lt;div class="card"&gt;&lt;h3&gt;Feature 1&lt;/h3&gt;&lt;p&gt;Serverless Compute & Deployments&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="card"&gt;&lt;h3&gt;Feature 2&lt;/h3&gt;&lt;p&gt;Global Edge Network & Caching&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="card"&gt;&lt;h3&gt;Feature 3&lt;/h3&gt;&lt;p&gt;Realtime Database Synchronization&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download both <code>mystery.css</code> and <code>index.html</code> into the same directory.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Use DevTools (Elements → Styles → Computed) to investigate and fix every specificity and media query conflict.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Test at all breakpoints (320px, 768px, 1024px, 1440px) to verify clean rendering.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Submit your corrected <code>mystery.css</code> file before the deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">CSS</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--hard">Hard</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">20</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Get the starter files to test locally in your browser.</p>
+            <button onclick="downloadCode('mystery.css', getMysteryCssStarterCode())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download mystery.css
+            </button>
+            <button onclick="downloadCode('index.html', getMysteryHtmlStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download index.html
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="css-moderate.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← CSS Moderate</a>
+            <a href="js-easy.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: JS Easy →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getMysteryCssStarterCode() {
+      return `/* Conflicting specificity example */
+
+.hero .content h1 {
+  color: #1e293b;
+  font-size: 3rem;
+}
+
+/* Higher specificity — overrides the above */
+section.hero div.content h1.title {
+  color: red !important; /* BUG: Wrong color + !important */
+  font-size: 1rem; /* BUG: Way too small */
+}
+
+/* This tries to fix it but can't win */
+h1 {
+  color: #0f172a;
+  font-size: 3.5rem;
+}
+
+/* Media query issues */
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* BUG: This overrides the above because it comes after */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: 1fr; /* Should be for mobile only */
+  }
+}
+
+/* Overlapping z-index chaos */
+.hero { z-index: 100; position: relative; }
+.nav { z-index: 50; position: fixed; } /* BUG: Nav behind hero */
+.modal { z-index: 10; } /* BUG: Modal behind everything */
+`;
+    }
+
+    function getMysteryHtmlStarterCode() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The CSS Mystery - CSS Hard Challenge</title>
+  <link rel="stylesheet" href="mystery.css">
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 0; }
+    .hero { padding: 60px 20px; background: #1e293b; text-align: center; }
+    .features-grid { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .card { background: #1e293b; padding: 24px; border-radius: 8px; border: 1px solid #334155; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="content">
+      <h1 class="title">Next-Gen Cloud Platform</h1>
+      <p>Investigate the CSS specificity rules and media queries causing styling conflicts.</p>
+    </div>
+  </section>
+
+  <div class="features-grid">
+    <div class="card"><h3>Feature 1</h3><p>Serverless Compute & Deployments</p></div>
+    <div class="card"><h3>Feature 2</h3><p>Global Edge Network & Caching</p></div>
+    <div class="card"><h3>Feature 3</h3><p>Realtime Database Synchronization</p></div>
+  </div>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

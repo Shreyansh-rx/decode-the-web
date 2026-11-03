@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JavaScript Hard Challenge: Debug complex runtime bugs, async race conditions, and duplicate listeners in an interactive dashboard. DECODE THE WEB.">
+  <title>The Broken Dashboard — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Challenge Detail -->
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--js">JS JavaScript</span>
+          <span class="badge badge--hard">Hard</span>
+          <span style="color: var(--accent-cyan); font-weight: 600; font-size: 0.85rem;">20 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">The Broken Dashboard</h1>
+        <p class="challenge-detail__subtitle">An interactive analytics dashboard suffers from erratic asynchronous updates, severe race conditions, duplicate event listeners, and memory leaks. Debug the runtime engine.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <!-- Main Content -->
+        <div class="challenge-detail__main">
+          <!-- Problem Statement -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>You are tasked with fixing a critical, real-time analytics dashboard application. While the user interface loads, clicking filters and switching tabs triggers bizarre and intermittent bugs:</p>
+            <ul>
+              <li><strong>Asynchronous Race Conditions:</strong> When rapidly clicking between "Today", "7 Days", and "30 Days", an earlier slow network request resolves <em>after</em> a fast one, displaying stale, outdated metrics.</li>
+              <li><strong>Duplicate Event Listeners:</strong> Each time the metrics table is re-rendered, event listeners are attached repeatedly to action buttons without debouncing or cleanup, firing 10+ duplicate alerts and API requests on a single click.</li>
+              <li><strong>Unsynchronized Promise Rejections:</strong> A failed simulated endpoint crashes the entire event loop because error handling or fallback states are missing.</li>
+              <li><strong>Incorrect Data Transform:</strong> Summary statistics calculate averages incorrectly due to mismatched keys and mutation of the original cached data array.</li>
+            </ul>
+          </div>
+
+          <!-- Requirements -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li><strong>Eliminate Race Conditions:</strong> Implement a request cancellation token or track an incremental request ID (or abort controller) so only the latest requested dataset is rendered.</li>
+              <li><strong>Fix Event Listener Duplication:</strong> Use proper event delegation on a stable parent container, or cleanly unbind previous listeners before re-attaching.</li>
+              <li><strong>Robust Asynchronous Handling:</strong> Wrap asynchronous calls in proper <code>try...catch</code> blocks and display a non-blocking error/loading state.</li>
+              <li><strong>Immutable Data Transformations:</strong> Ensure filtering and calculating totals do not destructively mutate the primary global dataset.</li>
+              <li><strong>Accurate Metric Calculations:</strong> Fix the metric summation formulas so total revenue, active users, and conversion percentages reflect the active time range.</li>
+            </ul>
+          </div>
+
+          <!-- Expected Behaviour -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Expected Behaviour
+            </h2>
+            <ul>
+              <li>Rapidly clicking different date filters always displays the data corresponding to the <em>last clicked</em> tab.</li>
+              <li>Action buttons (e.g., "Export Row", "Refresh") fire exactly once per click.</li>
+              <li>Simulated network latency or timeouts do not freeze the UI or log unhandled Promise rejections.</li>
+              <li>The summary metrics match the rendered table rows precisely.</li>
+              <li>Memory usage remains stable during frequent tab switches.</li>
+            </ul>
+          </div>
+
+          <!-- Investigation Tips -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              DevTools Investigation Tips
+            </h2>
+            <div class="info-box" style="margin-bottom: 12px;">
+              <div class="info-box__title">💡 Inspect Event Listeners Panel</div>
+              <p class="info-box__text">In Chrome DevTools, inspect any button inside the dashboard table and look at the <strong>Event Listeners</strong> tab on the right panel. Check if multiple listeners of type <code>click</code> are stacked on the same element.</p>
+            </div>
+            <div class="info-box">
+              <div class="info-box__title">💡 Network Throttling & Console Breakpoints</div>
+              <p class="info-box__text">Simulate slow 3G or variable network latency in the DevTools Network tab to expose the async race condition immediately. Use conditional breakpoints inside the async resolver function.</p>
+            </div>
+          </div>
+
+          <!-- Starter Code Preview -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Code Preview
+            </h2>
+            <p>Below is an excerpt of the flawed async controller in <code class="inline-code">dashboard.js</code>:</p>
+
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>dashboard.js (excerpt with race condition)</span>
+                <div>
+                  <button onclick="downloadCode('dashboard.js', getDashboardStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download File</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>// The Broken Dashboard - Runtime Engine
+let activeTimeframe = 'today';
+let cachedData = [];
+
+// BUG 1: Severe Race Condition
+// When users click quickly, slow requests resolve after quick ones!
+function fetchDashboardData(timeframe) {
+  showLoader(true);
+  
+  // Simulated variable API latency (50ms - 1500ms)
+  const simulatedDelay = timeframe === '30days' ? 1200 : 200;
+  
+  setTimeout(() =&gt; {
+    const data = generateMockData(timeframe);
+    // BUG: No check whether 'timeframe' is still the currently selected one!
+    cachedData = data;
+    renderMetrics(cachedData);
+    renderTable(cachedData);
+    showLoader(false);
+  }, simulatedDelay);
+}
+
+// BUG 2: Duplicate Event Listeners added on every re-render!
+function renderTable(items) {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+  
+  items.forEach(item =&gt; {
+    const tr = document.createElement('tr');
+    tr.innerHTML = \`
+      &lt;td&gt;\${item.name}&lt;/td&gt;
+      &lt;td&gt;$\${item.revenue}&lt;/td&gt;
+      &lt;td&gt;&lt;button class="btn-action" data-id="\${item.id}"&gt;Action&lt;/button&gt;&lt;/td&gt;
+    \`;
+    tbody.appendChild(tr);
+  });
+
+  // BUG: Adding document-wide or querySelectorAll listener on EVERY render!
+  document.querySelectorAll('.btn-action').forEach(btn =&gt; {
+    btn.addEventListener('click', handleActionClick); // Multiplies exponentially!
+  });
+}
+
+function handleActionClick(e) {
+  console.log("Action triggered for:", e.target.dataset.id);
+  // Fires 4x, 8x, 16x as you switch tabs!
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download the dashboard starter kit and launch it in your local browser.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Use browser DevTools to isolate and fix the asynchronous race conditions and memory leaks.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Refactor the listener registration to use robust event delegation.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Package and submit your working <code class="inline-code">dashboard.js</code> before the announced deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">JavaScript</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--hard">Hard</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">20</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Dashboard Preview</h3>
+            <div class="preview-box">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+              </div>
+              <div class="preview-box__body" style="background: #0f172a; padding: 16px;">
+                <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                  <span style="background: #3b82f6; font-size: 0.65rem; padding: 3px 8px; border-radius: 4px; color: white;">Today</span>
+                  <span style="background: #1e293b; font-size: 0.65rem; padding: 3px 8px; border-radius: 4px; color: #94a3b8;">7 Days</span>
+                  <span style="background: #1e293b; font-size: 0.65rem; padding: 3px 8px; border-radius: 4px; color: #94a3b8;">30 Days</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                  <div style="background: #1e293b; padding: 8px; border-radius: 6px; border-left: 3px solid #8b5cf6;">
+                    <div style="font-size: 0.6rem; color: #94a3b8;">Revenue</div>
+                    <div style="font-size: 0.9rem; font-weight: 700; color: #f8fafc;">$12,450</div>
+                  </div>
+                  <div style="background: #1e293b; padding: 8px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                    <div style="font-size: 0.6rem; color: #94a3b8;">Active Users</div>
+                    <div style="font-size: 0.9rem; font-weight: 700; color: #f8fafc;">1,840</div>
+                  </div>
+                </div>
+                <div style="font-size: 0.65rem; color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 6px; border-radius: 4px;">
+                  ⚠ Bug: Rapid switching renders stale data!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Download the dashboard files containing the simulated API runtime.</p>
+            <button onclick="downloadCode('dashboard-starter.html', getDashboardFullStarterPackage())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download Starter HTML
+            </button>
+            <button onclick="downloadCode('dashboard.js', getDashboardStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download dashboard.js
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="js-moderate.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← Prev: JS Moderate</a>
+            <a href="../challenges.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">All Challenges 📋</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getDashboardStarterCode() {
+      return `// The Broken Dashboard - Runtime Engine
+let activeTimeframe = 'today';
+let cachedData = [];
+
+// BUG 1: Race Condition in Async fetching
+function fetchDashboardData(timeframe) {
+  showLoader(true);
+  
+  // Simulated variable API latency (50ms - 1500ms)
+  const simulatedDelay = timeframe === '30days' ? 1200 : 200;
+  
+  setTimeout(() => {
+    const data = generateMockData(timeframe);
+    // BUG: Missing verification if user switched timeframe while waiting!
+    cachedData = data;
+    renderMetrics(cachedData);
+    renderTable(cachedData);
+    showLoader(false);
+  }, simulatedDelay);
+}
+
+// BUG 2: Event Listener proliferation on every re-render
+function renderTable(items) {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+  
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = \`
+      <td>\${item.name}</td>
+      <td>$\${item.revenue}</td>
+      <td><button class="btn-action" data-id="\${item.id}">Action</button></td>
+    \`;
+    tbody.appendChild(tr);
+  });
+
+  // Re-attaching click events every time!
+  document.querySelectorAll('.btn-action').forEach(btn => {
+    btn.addEventListener('click', handleActionClick);
+  });
+}
+
+function handleActionClick(e) {
+  alert("Action triggered for ID: " + e.target.dataset.id);
+}
+
+function generateMockData(timeframe) {
+  if (timeframe === 'today') return [{ id: 1, name: 'Web Traffic', revenue: 1200 }];
+  if (timeframe === '7days') return [{ id: 1, name: 'Web Traffic', revenue: 8400 }];
+  if (timeframe === '30days') return [{ id: 1, name: 'Web Traffic', revenue: 36000 }];
+  return [];
+}
+
+function showLoader(visible) {
+  const loader = document.getElementById('loader');
+  if (loader) loader.style.display = visible ? 'block' : 'none';
+}
+`;
+    }
+
+    function getDashboardFullStarterPackage() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Broken Dashboard Challenge</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 30px; }
+    .dashboard { max-width: 800px; margin: 0 auto; background: #1e293b; padding: 24px; border-radius: 12px; }
+    .filters { display: flex; gap: 10px; margin-bottom: 20px; }
+    .filters button { padding: 8px 16px; background: #334155; border: none; color: white; border-radius: 6px; cursor: pointer; }
+    .filters button.active { background: #6366f1; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #334155; }
+    .btn-action { padding: 6px 12px; background: #3b82f6; border: none; color: white; border-radius: 4px; cursor: pointer; }
+    #loader { display: none; color: #38bdf8; font-weight: bold; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h2>Analytics Dashboard</h2>
+    <div class="filters">
+      <button onclick="fetchDashboardData('today')">Today</button>
+      <button onclick="fetchDashboardData('7days')">7 Days</button>
+      <button onclick="fetchDashboardData('30days')">30 Days</button>
+    </div>
+    <div id="loader">Fetching data...</div>
+    <table>
+      <thead>
+        <tr><th>Channel</th><th>Revenue</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+  <script src="dashboard.js"><\/script>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

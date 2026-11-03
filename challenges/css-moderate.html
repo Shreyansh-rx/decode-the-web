@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSS Moderate Challenge: Fix a broken dashboard with Grid and Flexbox layout issues. DECODE THE WEB Competition.">
+  <title>Dashboard Layout Repair — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--css">{ } CSS</span>
+          <span class="badge badge--moderate">Moderate</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">10 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">Dashboard Layout Repair</h1>
+        <p class="challenge-detail__subtitle">A dashboard interface has broken Grid and Flexbox layouts. Fix the CSS to create a properly structured, responsive dashboard.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <div class="challenge-detail__main">
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>You've been given a dashboard interface for an analytics application. The dashboard should display a sidebar, stat cards in a grid, a chart area, and a recent activity list. However, the CSS Grid and Flexbox properties are incorrectly configured, causing the entire layout to break.</p>
+            <p>Cards are overlapping, the sidebar is pushed below the main content, stat numbers are misaligned, and the layout completely falls apart on mobile screens. Your job is to fix all CSS issues while preserving the existing HTML structure.</p>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Fix the main layout grid — sidebar on the left (250px), main content area filling the rest.</li>
+              <li>Correct the stat cards grid — 4 cards in a row using <code class="inline-code">grid-template-columns</code>.</li>
+              <li>Fix card alignment — content should be vertically centred within each card using Flexbox.</li>
+              <li>Repair the chart container — it should span the full width of the content area.</li>
+              <li>Fix the activity list — items should be properly spaced with consistent padding.</li>
+              <li>Add responsive breakpoints: 2 columns for tablets (768px), 1 column for mobile (480px).</li>
+              <li>The sidebar should collapse to a horizontal top bar on mobile.</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Visual Reference & Target Preview
+            </h2>
+            <p>Below is the visual target. Toggle between the <strong>Expected Dashboard Layout</strong> and the <strong>Current Broken State</strong> to inspect the CSS Grid and Flexbox layout structure.</p>
+
+            <!-- Large Preview Box -->
+            <div class="preview-box preview-box--lg">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+                <div class="preview-box__address-bar">
+                  <span>🔒</span>
+                  <span>http://localhost:3000/analytics-dashboard/index.html</span>
+                </div>
+                <div style="display: flex; gap: 6px; margin-left: auto;">
+                  <button type="button" class="preview-tab-btn active" onclick="switchPreviewTab(this, 'expected')" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ✅ Expected Grid
+                  </button>
+                  <button type="button" class="preview-tab-btn" onclick="switchPreviewTab(this, 'broken')" style="background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer;">
+                    ❌ Current Broken
+                  </button>
+                </div>
+              </div>
+
+              <!-- View 1: Expected Dashboard Layout -->
+              <div class="preview-box__body preview-view-pane" data-pane="expected" style="display: block; background: #0f172a; padding: 20px; width: 100%;">
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 16px; border: 1px solid #334155; border-radius: 8px; overflow: hidden; background: #0a0e17;">
+                  <!-- Sidebar -->
+                  <div style="background: #1e293b; padding: 16px; border-right: 1px solid #334155;">
+                    <div style="font-weight: 700; color: #38bdf8; font-size: 0.85rem; margin-bottom: 16px;">📊 Analytics</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.75rem;">
+                      <span style="color: #a855f7; font-weight: 600; background: rgba(168,85,247,0.1); padding: 4px 8px; border-radius: 4px;">Overview</span>
+                      <span style="color: #94a3b8; padding: 4px 8px;">Reports</span>
+                      <span style="color: #94a3b8; padding: 4px 8px;">Metrics</span>
+                      <span style="color: #94a3b8; padding: 4px 8px;">Settings</span>
+                    </div>
+                  </div>
+
+                  <!-- Main Area -->
+                  <div style="padding: 16px;">
+                    <!-- 4 Column Stat Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px;">
+                      <div style="background: #1e293b; padding: 12px; border-radius: 6px; border-left: 3px solid #a855f7;">
+                        <div style="font-size: 0.65rem; color: #94a3b8;">Total Revenue</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #f8fafc;">$48,200</div>
+                      </div>
+                      <div style="background: #1e293b; padding: 12px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                        <div style="font-size: 0.65rem; color: #94a3b8;">Active Users</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #f8fafc;">14,350</div>
+                      </div>
+                      <div style="background: #1e293b; padding: 12px; border-radius: 6px; border-left: 3px solid #06b6d4;">
+                        <div style="font-size: 0.65rem; color: #94a3b8;">Conversion</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #f8fafc;">4.8%</div>
+                      </div>
+                      <div style="background: #1e293b; padding: 12px; border-radius: 6px; border-left: 3px solid #4ade80;">
+                        <div style="font-size: 0.65rem; color: #94a3b8;">Bounce Rate</div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #f8fafc;">24.2%</div>
+                      </div>
+                    </div>
+
+                    <!-- Chart Mockup -->
+                    <div style="background: #1e293b; border-radius: 6px; padding: 12px; margin-bottom: 12px;">
+                      <div style="font-size: 0.75rem; font-weight: 600; color: #e2e8f0; margin-bottom: 10px;">Traffic Growth (Weekly)</div>
+                      <div style="height: 60px; display: flex; align-items: flex-end; gap: 8px;">
+                        <div style="flex: 1; height: 40%; background: #a855f7; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 60%; background: #a855f7; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 50%; background: #a855f7; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 75%; background: #3b82f6; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 65%; background: #3b82f6; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 90%; background: #06b6d4; border-radius: 2px;"></div>
+                        <div style="flex: 1; height: 80%; background: #06b6d4; border-radius: 2px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- View 2: Broken State -->
+              <div class="preview-box__body preview-view-pane" data-pane="broken" style="display: none; background: #0f172a; padding: 20px; width: 100%;">
+                <div style="border: 2px solid #ef4444; border-radius: 6px; padding: 16px; background: #1e293b;">
+                  <div style="background: #334155; padding: 10px; margin-bottom: 12px; border-radius: 4px;">
+                    ⚠️ Sidebar floated left, taking 100% width, pushing main content down and overflowing!
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: #0f172a; padding: 8px; border: 1px solid #ef4444; color: #f87171; font-size: 0.75rem;">Stat cards stacking vertically in 1 column instead of 4-column grid</div>
+                    <div style="background: #0f172a; padding: 8px; border: 1px solid #ef4444; color: #f87171; font-size: 0.75rem;">Cards have width: 400px fixed, causing horizontal scrolling and overflow on mobile</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to Verify Your Work Card -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              How to Test & Verify Your Solution
+            </h2>
+            <p>Follow these steps to inspect and confirm your Grid and Flexbox repairs in real time:</p>
+            <div class="verification-guide">
+              <ol>
+                <li><strong>Download Both Files:</strong> Download <code>dashboard.css</code> and the companion <code>index.html</code> (available below or in the sidebar) into the <strong>same folder</strong>.</li>
+                <li><strong>Open in Browser:</strong> Double-click <code>index.html</code> to open it in Chrome or Firefox. Notice how the layout is broken with floated elements and vertical stacking.</li>
+                <li><strong>Edit in VS Code:</strong> Open <code>dashboard.css</code>, convert the dashboard container to <code>display: grid</code>, set up proper column definitions, and save (<code>Ctrl + S</code>).</li>
+                <li><strong>Refresh Browser:</strong> Hit <code>F5</code> in your browser to verify that the sidebar and stat cards immediately form a clean multi-column grid.</li>
+                <li><strong>Test Responsive Breakpoints:</strong> Press <code>F12</code> and toggle the Device Toolbar (<code>Ctrl + Shift + M</code>). Drag the viewport width to test:
+                  <ul style="margin-top: 6px; list-style-type: disc; padding-left: 20px;">
+                    <li><strong>Desktop (> 768px):</strong> Sidebar (250px) + Main content (1fr), 4-column stat grid.</li>
+                    <li><strong>Tablet (<= 768px):</strong> 2-column stat grid.</li>
+                    <li><strong>Mobile (<= 480px):</strong> 1-column single stacked layout with no horizontal overflow.</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Starter Code Preview with Tabs -->
+          <div class="detail-card code-tab-container">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Files (CSS & Companion HTML)
+            </h2>
+            <p>You will modify <strong>dashboard.css</strong>. We also provide the companion <strong>index.html</strong> so you can open it in your browser to test your styles in real time.</p>
+
+            <div class="code-tabs">
+              <button type="button" class="code-tab-btn active" onclick="switchCodeTab(this, 'tab-mod-css')">📄 dashboard.css (Broken CSS to Edit)</button>
+              <button type="button" class="code-tab-btn" onclick="switchCodeTab(this, 'tab-mod-html')">🌐 index.html (Companion Test Page)</button>
+            </div>
+
+            <!-- Tab 1: CSS -->
+            <div class="code-block code-tab-pane" id="tab-mod-css" style="display: block; margin-top: 0;">
+              <div class="code-block__header">
+                <span>dashboard.css (file to fix)</span>
+                <div>
+                  <button onclick="downloadCode('dashboard.css', getDashboardCssStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download dashboard.css</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>/* Broken Dashboard Layout */
+
+.dashboard {
+  /* BUG: Not using grid */
+  display: block;
+}
+
+.sidebar {
+  /* BUG: Should be fixed width in grid */
+  width: 100%;
+  float: left; /* BUG: Don't use float */
+}
+
+.main-content {
+  /* BUG: Not filling remaining space */
+  width: 50%;
+}
+
+.stat-grid {
+  /* BUG: Wrong grid setup */
+  display: flex;
+  flex-direction: column; /* BUG: Should be grid */
+}
+
+.stat-card {
+  /* BUG: No flexbox alignment for content */
+  text-align: left;
+  padding: 0;
+}
+
+.chart-container {
+  /* BUG: Width not spanning correctly */
+  width: 50%;
+  float: right; /* BUG: Don't use float */
+}
+
+/* BUG: No responsive breakpoints at all */</code></pre>
+              </div>
+            </div>
+
+            <!-- Tab 2: Companion HTML -->
+            <div class="code-block code-tab-pane" id="tab-mod-html" style="display: none; margin-top: 0;">
+              <div class="code-block__header">
+                <span>index.html (companion markup to open in browser)</span>
+                <div>
+                  <button onclick="downloadCode('index.html', getDashboardHtmlStarterCode())" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download index.html</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Dashboard Layout Repair - CSS Moderate Challenge&lt;/title&gt;
+  &lt;link rel="stylesheet" href="dashboard.css"&gt;
+  &lt;style&gt;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; }
+    .sidebar { background: #1e293b; padding: 24px; min-height: 100vh; border-right: 1px solid #334155; }
+    .main-content { padding: 32px; }
+    .card { background: #1e293b; padding: 24px; border-radius: 8px; border: 1px solid #334155; }
+    h1 { margin-bottom: 24px; color: #38bdf8; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="dashboard"&gt;
+    &lt;aside class="sidebar"&gt;
+      &lt;h2&gt;Analytics&lt;/h2&gt;
+      &lt;ul style="list-style: none; margin-top: 20px; line-height: 2;"&gt;
+        &lt;li&gt;Overview&lt;/li&gt;
+        &lt;li&gt;Metrics&lt;/li&gt;
+        &lt;li&gt;Reports&lt;/li&gt;
+        &lt;li&gt;Settings&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/aside&gt;
+
+    &lt;main class="main-content"&gt;
+      &lt;h1&gt;Performance Overview&lt;/h1&gt;
+      &lt;div class="card-grid"&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Total Revenue&lt;/h3&gt;&lt;p style="font-size: 2rem; color: #4ade80;"&gt;$48,200&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Active Users&lt;/h3&gt;&lt;p style="font-size: 2rem; color: #38bdf8;"&gt;14,350&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Conversion Rate&lt;/h3&gt;&lt;p style="font-size: 2rem; color: #a855f7;"&gt;4.8%&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Bounce Rate&lt;/h3&gt;&lt;p style="font-size: 2rem; color: #f59e0b;"&gt;24.2%&lt;/p&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submission Instructions -->
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number">1</div>
+                <p class="submission-step__text">Download both <code>dashboard.css</code> and <code>index.html</code> into the same directory.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">2</div>
+                <p class="submission-step__text">Fix the Grid, Flexbox, and media query breakpoint order in <code>dashboard.css</code>.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">3</div>
+                <p class="submission-step__text">Test at multiple viewport widths (desktop, tablet, mobile) in your browser.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number">4</div>
+                <p class="submission-step__text">Submit your corrected <code>dashboard.css</code> file before the deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">CSS</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--moderate">Moderate</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">10</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Get the starter files to test locally in your browser.</p>
+            <button onclick="downloadCode('dashboard.css', getDashboardCssStarterCode())" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+              ⬇ Download dashboard.css
+            </button>
+            <button onclick="downloadCode('index.html', getDashboardHtmlStarterCode())" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download index.html
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="css-easy.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← CSS Easy</a>
+            <a href="css-hard.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: CSS Hard →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function getDashboardCssStarterCode() {
+      return `/* Broken Dashboard Layout */
+
+.dashboard {
+  /* BUG: Not using grid */
+  display: block;
+}
+
+.sidebar {
+  /* BUG: Should be fixed width in grid */
+  width: 100%;
+  float: left; /* BUG: Don't use float */
+}
+
+.main-content {
+  /* BUG: Not filling remaining space */
+  width: 50%;
+}
+
+.card-grid {
+  /* BUG: Cards stacking instead of responsive grid */
+  display: block;
+}
+
+.card {
+  /* BUG: Fixed pixel widths break responsiveness */
+  width: 400px;
+  margin-bottom: 20px;
+  overflow: visible;
+}
+
+/* BUG: Breakpoint in reverse order */
+@media (max-width: 480px) {
+  .dashboard {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    /* Tablet overrides mobile because it comes after! */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+}
+`;
+    }
+
+    function getDashboardHtmlStarterCode() {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Layout Repair - CSS Moderate Challenge</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; }
+    .sidebar { background: #1e293b; padding: 24px; min-height: 100vh; border-right: 1px solid #334155; }
+    .main-content { padding: 32px; }
+    .card { background: #1e293b; padding: 24px; border-radius: 8px; border: 1px solid #334155; }
+    h1 { margin-bottom: 24px; color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>Analytics</h2>
+      <ul style="list-style: none; margin-top: 20px; line-height: 2;">
+        <li>Overview</li>
+        <li>Metrics</li>
+        <li>Reports</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h1>Performance Overview</h1>
+      <div class="card-grid">
+        <div class="card"><h3>Total Revenue</h3><p style="font-size: 2rem; color: #4ade80;">$48,200</p></div>
+        <div class="card"><h3>Active Users</h3><p style="font-size: 2rem; color: #38bdf8;">14,350</p></div>
+        <div class="card"><h3>Conversion Rate</h3><p style="font-size: 2rem; color: #a855f7;">4.8%</p></div>
+        <div class="card"><h3>Bounce Rate</h3><p style="font-size: 2rem; color: #f59e0b;">24.2%</p></div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>`;
+    }
+  </script>
+</body>
+</html>

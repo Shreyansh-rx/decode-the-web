@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TechStore - Broken Products</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 24px; }
+    .header { margin-bottom: 24px; }
+    .nav { display: flex; gap: 16px; margin-top: 8px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .product-card { display: block; background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155; }
+    .product-image { height: 140px; background: #334155; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin-bottom: 12px; }
+    .btn { display: inline-block; padding: 8px 16px; background: #3b82f6; color: white; border-radius: 4px; text-decoration: none; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <!-- BUG: No semantic header/nav elements -->
+  <div class="header">
+    <h1>TechStore</h1>
+    <div class="nav">
+      <div>Home</div>
+      <div>Products</div>
+      <div>Contact</div>
+    </div>
+  </div>
+
+  <div class="products">
+    <!-- BUG: h4 used instead of h2 (heading order skip) -->
+    <h4>Featured Products</h4>
+
+    <!-- BUG: Invalid nesting - block inside inline element -->
+    <span class="product-card">
+      <div class="product-image">
+        <!-- BUG: Broken image path, missing alt attribute -->
+        <img src="images/missing-keyboard.png">
+      </div>
+      <!-- BUG: h1 inside card -->
+      <h1>Mechanical Keyboard</h1>
+      <p>Custom mechanical keyboard with RGB backlighting.</p>
+      <div class="price">$89.99</div>
+      <!-- BUG: Empty unclickable anchor -->
+      <a class="btn">Add to Cart</a>
+    </span>
+
+    <span class="product-card">
+      <div class="product-image">
+        <!-- BUG: Broken image path, missing alt -->
+        <img src="images/headphones-broken.jpg">
+      </div>
+      <h1>Wireless Headphones</h1>
+      <p>Noise-cancelling wireless over-ear headphones.</p>
+      <div class="price">$149.99</div>
+      <a class="btn">Add to Cart</a>
+    </span>
+  </div>
+</body>
+</html>

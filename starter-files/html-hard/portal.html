@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UniPortal - Student Dashboard (Investigate DOM)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0b1329; color: #f8fafc; padding: 24px; }
+    /* Intentionally misleading CSS */
+    .visible { display: none !important; }
+    .hidden-section { display: block; }
+    [data-status="active"] { opacity: 0; }
+    .card { background: #1e293b; padding: 20px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #334155; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    nav ul { display: flex; list-style: none; gap: 20px; padding: 0; }
+    nav a { color: #38bdf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="#dash">Dashboard</a></li>
+        <!-- CLUE 1: Hidden by misleading class .visible -->
+        <li class="visible"><a href="#courses">Courses (Hidden by class)</a></li>
+        <!-- CLUE 2: Hidden by inline style -->
+        <li><a href="#grades" style="display:none">Grades (Hidden by style)</a></li>
+        <!-- CLUE 3: Clue in aria & data attributes -->
+        <li data-clue="check-aria">
+          <a href="#schedule" aria-hidden="true" style="opacity: 0.1;">Schedule</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Welcome, Alex Chen</h2>
+      <p>Student ID: #98421 | Semester: Fall 2026</p>
+    </div>
+
+    <!-- CLUE 4: Dynamic DOM clue -->
+    <div class="grid">
+      <div class="card" data-status="active">
+        <h3>Cumulative GPA</h3>
+        <p style="font-size: 2rem; color: #22c55e;">3.89</p>
+        <span class="clue-tag" style="display:none;" data-secret="FLAG{DOM_DECODED_HTML_MASTER}">Inspection Secret</span>
+      </div>
+      <div class="card">
+        <h3>Credits Completed</h3>
+        <p style="font-size: 2rem; color: #38bdf8;">84 / 120</p>
+      </div>
+      <div class="card">
+        <h3>Academic Standing</h3>
+        <p style="font-size: 2rem; color: #a855f7;">Dean's Honor</p>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    console.log("Portal engine initialized. Inspect elements with data-clue or data-status attributes.");
+  </script>
+</body>
+</html>

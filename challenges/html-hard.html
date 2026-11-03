@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HTML Hard Challenge: Investigate a college portal with complex structural issues. DECODE THE WEB Competition.">
+  <title>College Portal Investigation — DECODE THE WEB</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../challenges.html" class="nav__link active">Challenges</a>
+        <a href="../rules.html" class="nav__link">Rules</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="challenge-detail">
+    <div class="container">
+      <a href="../challenges.html" class="challenge-detail__back">← Back to Challenges</a>
+
+      <div class="challenge-detail__header">
+        <div class="challenge-detail__meta">
+          <span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span>
+          <span class="badge badge--hard">Hard</span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">20 Points</span>
+        </div>
+        <h1 class="challenge-detail__title">College Portal Investigation</h1>
+        <p class="challenge-detail__subtitle">A college portal contains complex structural issues and hidden DOM clues. Use your DevTools skills to investigate and fix the underlying problems.</p>
+      </div>
+
+      <div class="challenge-detail__content">
+        <div class="challenge-detail__main">
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📋</span>
+              Problem Statement
+            </h2>
+            <p>You've been given a college portal webpage that appears normal at first glance, but contains deep structural issues hidden within the DOM. The page has dynamically injected elements, misleading class names, hidden attributes, and structurally inconsistent markup that affects how the browser interprets the content.</p>
+            <p>This challenge tests your ability to use browser Developer Tools to inspect, investigate, and understand complex HTML structures — not just surface-level bugs.</p>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">✅</span>
+              Requirements
+            </h2>
+            <ul>
+              <li>Open the provided HTML file and inspect the DOM using browser DevTools (Elements panel).</li>
+              <li>Identify structural inconsistencies — elements that are present in the DOM but not visible, or visible but incorrectly placed.</li>
+              <li>Investigate dynamically generated elements (check for JavaScript that modifies the DOM after page load).</li>
+              <li>Find hidden data attributes (<code class="inline-code">data-*</code>) that contain clues about what's broken.</li>
+              <li>Trace the root cause of rendering issues — misleading CSS classes, incorrect ARIA attributes, or invisible elements affecting layout.</li>
+              <li>Fix the underlying HTML issues to make the portal render correctly and accessibly.</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🎯</span>
+              Expected Behaviour
+            </h2>
+            <p>When correctly fixed, the college portal should:</p>
+            <ul>
+              <li>Display a complete navigation menu with all links visible and functional.</li>
+              <li>Show student dashboard cards with correct data (not hidden or overlapping).</li>
+              <li>Render the course schedule table with all rows visible.</li>
+              <li>Have all announcements section items displayed in chronological order.</li>
+              <li>Pass accessibility checks — correct ARIA roles, proper heading hierarchy, and valid semantic structure.</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">🔍</span>
+              Investigation Hints
+            </h2>
+            <div class="info-box" style="margin: 0;">
+              <div class="info-box__title">💡 Where to Look</div>
+              <p class="info-box__text">
+                Use the browser Elements panel to inspect the full DOM tree. Some elements may have <code class="inline-code">display: none</code> or <code class="inline-code">visibility: hidden</code> applied via inline styles or misleading class names. Check <code class="inline-code">data-</code> attributes for encoded clues. Look at the page source vs. the live DOM to spot dynamically injected differences.
+              </p>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">💻</span>
+              Starter Code Preview
+            </h2>
+            <p>The challenge file is more complex than what's shown here. Below is just a structural overview:</p>
+
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>portal.html</span>
+                <div>
+                  <button onclick="downloadCurrentCode(this, 'portal.html')" class="btn btn--sm btn--primary" style="padding: 4px 10px; font-size: 0.75rem; margin-right: 8px;">⬇ Download File</button>
+                  <button onclick="copyCode(this)" style="color: var(--accent-purple); font-size: 0.8rem; cursor: pointer; background: none; border: none;">Copy</button>
+                </div>
+              </div>
+              <div class="code-block__body">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;UniPortal - Student Dashboard&lt;/title&gt;
+  &lt;style&gt;
+    /* Some CSS is intentionally misleading */
+    .visible { display: none !important; }
+    .hidden-section { /* actually visible */ }
+    [data-status="active"] { opacity: 0; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;nav aria-label="Main Navigation"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="visible"&gt;&lt;a href="#"&gt;Courses&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#" style="display:none"&gt;Grades&lt;/a&gt;&lt;/li&gt;
+        &lt;li data-clue="check-aria"&gt;
+          &lt;a href="#" aria-hidden="true"&gt;Schedule&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;!-- Dashboard cards with hidden data --&gt;
+    &lt;section data-section="dashboard" data-status="active"&gt;
+      &lt;h2&gt;Student Overview&lt;/h2&gt;
+      &lt;!-- Cards are here but some are invisible... --&gt;
+    &lt;/section&gt;
+    
+    &lt;!-- More sections with deeper issues... --&gt;
+  &lt;/main&gt;
+
+  &lt;script&gt;
+    // DOM manipulation happens here after load
+    document.addEventListener('DOMContentLoaded', () =&gt; {
+      // Dynamically modifies elements...
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <h2 class="detail-card__title">
+              <span class="detail-card__title-icon">📤</span>
+              Submission Instructions
+            </h2>
+            <div class="submission-steps">
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Download the starter file and open it in your browser.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Use DevTools (Elements, Console, Computed Styles) to investigate the DOM thoroughly.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Fix all the HTML, CSS-class, and attribute issues you discover.</p>
+              </div>
+              <div class="submission-step">
+                <div class="submission-step__number"></div>
+                <p class="submission-step__text">Verify the portal renders completely and correctly, then submit before the deadline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="challenge-detail__sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Challenge Info</h3>
+            <div class="sidebar-card__info">
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Category</span>
+                <span class="sidebar-card__value">HTML</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Difficulty</span>
+                <span class="badge badge--hard">Hard</span>
+              </div>
+              <div class="sidebar-card__row">
+                <span class="sidebar-card__label">Points</span>
+                <span class="sidebar-card__value" style="color: var(--accent-cyan);">20</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Preview</h3>
+            <div class="preview-box">
+              <div class="preview-box__header">
+                <span class="preview-box__dot preview-box__dot--red"></span>
+                <span class="preview-box__dot preview-box__dot--yellow"></span>
+                <span class="preview-box__dot preview-box__dot--green"></span>
+              </div>
+              <div class="preview-box__body" style="background: #0f172a; padding: 16px;">
+                <div style="width: 100%; font-family: var(--font-sans);">
+                  <div style="margin-bottom: 10px; padding: 8px; background: #1e293b; border-radius: 4px;">
+                    <div style="font-size: 0.7rem; font-weight: 700; color: #a855f7;">UniPortal</div>
+                    <div style="display: flex; gap: 6px; margin-top: 4px;">
+                      <span style="font-size: 0.55rem; color: #22c55e;">Dashboard</span>
+                      <span style="font-size: 0.55rem; color: #ef4444; text-decoration: line-through;">Courses</span>
+                      <span style="font-size: 0.55rem; color: #ef4444; text-decoration: line-through;">Grades</span>
+                      <span style="font-size: 0.55rem; color: #f59e0b;">Schedule ⚠</span>
+                    </div>
+                  </div>
+                  <div style="padding: 8px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; margin-bottom: 8px;">
+                    <div style="font-size: 0.6rem; font-weight: 600; color: #ef4444;">⚠ Hidden Elements Detected</div>
+                    <div style="font-size: 0.5rem; color: #94a3b8;">Multiple DOM nodes are invisible due to misleading CSS classes and data attributes</div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <div style="background: #1e293b; border-radius: 4px; padding: 6px; opacity: 0.3;">
+                      <div style="font-size: 0.5rem; color: #64748b;">GPA</div>
+                      <div style="font-size: 0.7rem; font-weight: 700; color: #94a3b8;">???</div>
+                    </div>
+                    <div style="background: #1e293b; border-radius: 4px; padding: 6px; opacity: 0.3;">
+                      <div style="font-size: 0.5rem; color: #64748b;">Credits</div>
+                      <div style="font-size: 0.7rem; font-weight: 700; color: #94a3b8;">???</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Starter Package</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Download the portal HTML file to inspect the hidden DOM clues locally.</p>
+            <button onclick="downloadCode('portal.html', document.querySelector('.code-block pre').textContent)" class="btn btn--primary btn--sm" style="width: 100%; justify-content: center;">
+              ⬇ Download portal.html
+            </button>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">Quick Links</h3>
+            <a href="html-moderate.html" class="btn btn--secondary btn--sm" style="width: 100%; justify-content: center; margin-bottom: 8px;">← HTML Moderate</a>
+            <a href="css-easy.html" class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Next: CSS Easy →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="../index.html" class="footer__link">Home</a>
+          <a href="../challenges.html" class="footer__link">Challenges</a>
+          <a href="../rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

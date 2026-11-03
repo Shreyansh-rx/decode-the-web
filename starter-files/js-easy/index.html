@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Counter - JS Easy Challenge</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .counter-card {
+      background: #1e293b;
+      padding: 32px 48px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    .counter-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin: 16px 0 24px;
+      font-family: monospace;
+    }
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    #btn-add { background: #6366f1; color: white; }
+    #btn-sub { background: #475569; color: white; }
+    #btn-clear { background: transparent; border: 1px solid #64748b; color: #94a3b8; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="counter-card">
+    <h2>Interactive Counter</h2>
+    <div class="counter-value" id="counter-value">0</div>
+    <div class="button-group">
+      <button id="btn-sub">−</button>
+      <button id="btn-add">+</button>
+    </div>
+    <button id="btn-clear">Reset</button>
+  </div>
+  <script src="counter.js"></script>
+</body>
+</html>

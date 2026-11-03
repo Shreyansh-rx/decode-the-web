@@ -1,0 +1,46 @@
+/* Conflicting Specificity & Inheritance Mystery */
+
+/* Base element rule */
+h1 {
+  color: #0f172a;
+  font-size: 3.5rem;
+}
+
+/* Class rule */
+.hero .content h1 {
+  color: #1e293b;
+  font-size: 3rem;
+}
+
+/* Higher specificity — overrides the above and breaks design */
+section.hero div.content h1.title {
+  color: red !important; /* BUG: Incorrect color with !important */
+  font-size: 1rem;       /* BUG: Way too small */
+}
+
+/* Grid layout with inverted media queries */
+.features-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* BUG: Order conflict - 1024px rule defined AFTER 768px rule overrides mobile layout */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Overlapping positioning bug */
+.cta-banner {
+  position: absolute;
+  top: 50px;
+  z-index: -1; /* BUG: Stacking context places it behind content */
+}

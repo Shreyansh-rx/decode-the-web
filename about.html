@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about DECODE THE WEB — a frontend development competition focused on debugging HTML, CSS, and JavaScript.">
+  <title>About — DECODE THE WEB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="challenges.html" class="nav__link">Challenges</a>
+        <a href="rules.html" class="nav__link">Rules</a>
+        <a href="about.html" class="nav__link active">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">About <span>The Competition</span></h1>
+      <p class="page-header__desc">A unique frontend development competition that tests your debugging skills across real-world web scenarios.</p>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="about-grid animate-on-scroll">
+        <div class="about-card">
+          <div class="about-card__icon">🎯</div>
+          <h3 class="about-card__title">Our Mission</h3>
+          <p class="about-card__text">To challenge participants to think critically, debug effectively, and demonstrate real-world frontend development skills beyond just writing code.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon">🔍</div>
+          <h3 class="about-card__title">What Makes Us Different</h3>
+          <p class="about-card__text">Unlike typical coding contests, DECODE THE WEB focuses on investigation and debugging — skills every professional developer needs daily.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon">🧠</div>
+          <h3 class="about-card__title">Skills Tested</h3>
+          <p class="about-card__text">HTML structure, CSS layouts, JavaScript logic, browser DevTools proficiency, debugging methodology, and attention to detail.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon">🏗️</div>
+          <h3 class="about-card__title">Real-World Scenarios</h3>
+          <p class="about-card__text">Each challenge is based on realistic website problems — broken forms, misaligned layouts, buggy shopping carts, and more.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon">📊</div>
+          <h3 class="about-card__title">Progressive Difficulty</h3>
+          <p class="about-card__text">From easy fixes to complex investigations, the challenges scale in difficulty so every participant can contribute and learn.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon">🤝</div>
+          <h3 class="about-card__title">Fair Competition</h3>
+          <p class="about-card__text">All submissions are manually evaluated by experienced organizers, ensuring fair and thorough assessment of every participant's work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Technologies</div>
+        <h2 class="section__title">What You'll Work With</h2>
+        <p class="section__desc">Three core frontend technologies, each with three levels of challenge difficulty.</p>
+      </div>
+
+      <div class="steps animate-on-scroll" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="step" style="border-top: 3px solid #e34f26; text-align: left;">
+          <div class="step__number" style="background: #e34f26; margin: 0 0 20px 0;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">&lt;/&gt;</span>
+          </div>
+          <h3 class="step__title">HTML5</h3>
+          <p class="step__desc" style="margin-bottom: 16px;">The backbone of the web. You'll work with:</p>
+          <ul style="list-style: none; padding: 0; text-align: left;">
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Semantic HTML elements</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Form structure & validation</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Document hierarchy</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ DOM investigation</li>
+          </ul>
+        </div>
+        <div class="step" style="border-top: 3px solid #264de4; text-align: left;">
+          <div class="step__number" style="background: #264de4; margin: 0 0 20px 0;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">{ }</span>
+          </div>
+          <h3 class="step__title">CSS3</h3>
+          <p class="step__desc" style="margin-bottom: 16px;">Style and layout mastery. You'll debug:</p>
+          <ul style="list-style: none; padding: 0; text-align: left;">
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Flexbox & Grid layouts</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Responsive breakpoints</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ CSS specificity & inheritance</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Computed styles analysis</li>
+          </ul>
+        </div>
+        <div class="step" style="border-top: 3px solid #f0db4f; text-align: left;">
+          <div class="step__number" style="background: #f0db4f; color: #000; margin: 0 0 20px 0;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem;">JS</span>
+          </div>
+          <h3 class="step__title">JavaScript</h3>
+          <p class="step__desc" style="margin-bottom: 16px;">Logic and interactivity. You'll fix:</p>
+          <ul style="list-style: none; padding: 0; text-align: left;">
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Event listeners & handlers</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ DOM manipulation</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ Async operations</li>
+            <li style="padding: 6px 0; color: var(--text-secondary); font-size: 0.85rem;">→ State management bugs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">At a Glance</div>
+        <h2 class="section__title">Competition Overview</h2>
+      </div>
+
+      <div class="hero__stats animate-on-scroll" style="max-width: 800px; margin: 0 auto;">
+        <div class="hero__stat">
+          <div class="hero__stat-value">3</div>
+          <div class="hero__stat-label">Tracks</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value">9</div>
+          <div class="hero__stat-label">Challenges</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value">105</div>
+          <div class="hero__stat-label">Max Points</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value">3</div>
+          <div class="hero__stat-label">Difficulty Levels</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+        <a href="challenges.html" class="btn btn--primary">
+          <span>Start Exploring Challenges</span>
+          <span class="btn--icon">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Home</a>
+          <a href="challenges.html" class="footer__link">Challenges</a>
+          <a href="rules.html" class="footer__link">Rules</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

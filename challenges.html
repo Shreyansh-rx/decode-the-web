@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse all 9 challenges across HTML, CSS, and JavaScript categories in the DECODE THE WEB competition.">
+  <title>Challenges — DECODE THE WEB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="particles-container"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon"></div>
+        <span class="nav__logo-text">DECODE THE WEB</span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="challenges.html" class="nav__link active">Challenges</a>
+        <a href="rules.html" class="nav__link">Rules</a>
+        <a href="about.html" class="nav__link">About</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">All <span>Challenges</span></h1>
+      <p class="page-header__desc">9 challenges across 3 technology categories. Choose your path and start debugging.</p>
+    </div>
+  </header>
+
+  <!-- Challenge Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <!-- Category Tabs -->
+      <div class="tabs">
+        <button class="tab active" data-category="all">All Challenges</button>
+        <button class="tab" data-category="html">HTML</button>
+        <button class="tab" data-category="css">CSS</button>
+        <button class="tab" data-category="js">JavaScript</button>
+      </div>
+
+      <!-- Challenge Grid (rendered by JS) -->
+      <div class="challenges-grid" id="challengeGrid"></div>
+    </div>
+  </section>
+
+  <!-- Scoring Preview -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header animate-on-scroll">
+        <div class="section__label">Scoring</div>
+        <h2 class="section__title">Points Breakdown</h2>
+        <p class="section__desc">Maximum possible score: 105 points. All evaluations are done manually by the organizers.</p>
+      </div>
+
+      <div class="scoring-table-wrapper animate-on-scroll">
+        <table class="scoring-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Challenge</th>
+              <th>Difficulty</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span></td>
+              <td>Registration Form Repair</td>
+              <td><span class="badge badge--easy">Easy</span></td>
+              <td class="points">5</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span></td>
+              <td>E-commerce Product Structure</td>
+              <td><span class="badge badge--moderate">Moderate</span></td>
+              <td class="points">10</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--html">&lt;/&gt; HTML</span></td>
+              <td>College Portal Investigation</td>
+              <td><span class="badge badge--hard">Hard</span></td>
+              <td class="points">20</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--css">{ } CSS</span></td>
+              <td>Broken Navigation Bar</td>
+              <td><span class="badge badge--easy">Easy</span></td>
+              <td class="points">5</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--css">{ } CSS</span></td>
+              <td>Dashboard Layout Repair</td>
+              <td><span class="badge badge--moderate">Moderate</span></td>
+              <td class="points">10</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--css">{ } CSS</span></td>
+              <td>The CSS Mystery</td>
+              <td><span class="badge badge--hard">Hard</span></td>
+              <td class="points">20</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--js">JS JavaScript</span></td>
+              <td>Interactive Counter</td>
+              <td><span class="badge badge--easy">Easy</span></td>
+              <td class="points">5</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--js">JS JavaScript</span></td>
+              <td>Shopping Cart Repair</td>
+              <td><span class="badge badge--moderate">Moderate</span></td>
+              <td class="points">10</td>
+            </tr>
+            <tr>
+              <td><span class="tech-icon tech-icon--js">JS JavaScript</span></td>
+              <td>The Broken Dashboard</td>
+              <td><span class="badge badge--hard">Hard</span></td>
+              <td class="points">20</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="3">Total Maximum Score</td>
+              <td class="points" style="color: var(--accent-purple); font-size: 1.1rem;">105</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__text">© 2026 <span>DECODE THE WEB</span>. Frontend Development Competition.</p>
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Home</a>
+          <a href="rules.html" class="footer__link">Rules</a>
+          <a href="about.html" class="footer__link">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/challenges.js"></script>
+</body>
+</html>
